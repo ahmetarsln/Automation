@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class PatientAddView extends StatefulWidget {
-  const PatientAddView({super.key});
+class EmployeAddView extends StatefulWidget {
+  const EmployeAddView({super.key});
 
   @override
-  State<PatientAddView> createState() => _PatientAddViewState();
+  State<EmployeAddView> createState() => _EmployeAddViewState();
 }
 
-class _PatientAddViewState extends State<PatientAddView> {
+class _EmployeAddViewState extends State<EmployeAddView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -23,7 +23,7 @@ class _PatientAddViewState extends State<PatientAddView> {
           children: [
             TextFormField(
               decoration: const InputDecoration(
-                hintText: 'Tcnizi girin',
+                hintText: 'Adınızı girin',
               ),
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
@@ -34,22 +34,27 @@ class _PatientAddViewState extends State<PatientAddView> {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                hintText: 'Adınızı girin',
+                hintText: 'Soyadınızı girin',
               ),
             ),
             TextFormField(
               decoration: const InputDecoration(
-                hintText: 'Soyadınız girin',
+                hintText: 'Tcnizi girin',
               ),
             ),
             TextFormField(
               decoration: const InputDecoration(
-                hintText: 'Cinsiyetinizi girin',
+                hintText: 'Doğum tarihini giriniz',
               ),
             ),
             TextFormField(
               decoration: const InputDecoration(
-                hintText: 'Doğum tarihinizi girin',
+                hintText: 'Cinsiyetinizi giriniz',
+              ),
+            ),
+            TextFormField(
+              decoration: const InputDecoration(
+                hintText: 'Bölümünüzü giriniz',
               ),
             ),
             Padding(

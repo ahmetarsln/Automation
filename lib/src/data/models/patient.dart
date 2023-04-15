@@ -34,7 +34,7 @@ class Patient {
 }
 
 final patients = () async {
-  var input = await File('D:\\Okul\\MOCK_DATA.json').readAsString();
+  var input = await File('assets/json/patient.json').readAsString();
   var map = jsonDecode(input);
   var temp = map['patients'];
   var result = <Patient>[];

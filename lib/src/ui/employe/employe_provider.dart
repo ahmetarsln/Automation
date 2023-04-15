@@ -1,26 +1,25 @@
-
-import 'package:demo/src/data/models/appointment.dart';
+import 'package:demo/src/data/models/employe.dart';
 import 'package:flutter/material.dart';
 
-class AppointmentProvider extends ChangeNotifier {
-  List<Appointment> _appointmentList = [];
-  Appointment? _currentAppointment;
+class EmployeProvider extends ChangeNotifier {
+  List<Employe> _employeList = [];
+  Employe? _currentEmploye;
   bool _isLoading = true;
-  List<Appointment> get appointmentList => _appointmentList;
-  set appointmentList(List<Appointment> value) {
-    _appointmentList = value;
+  List<Employe> get employeList => _employeList;
+  set employeList(List<Employe> value) {
+    _employeList = value;
     notifyListeners();
   }
 
-  void changeAppointment(Appointment appointment) {
+  void changeEmploye(Employe employe) {
     _isLoading = true;
     notifyListeners();
-    _currentAppointment = appointment;
+    _currentEmploye = employe;
     _isLoading = false;
     notifyListeners();
   }
 
-  void fetchAppointment(String id) {
+  void fetchEmploye(String id) {
     _isLoading = true;
     notifyListeners();
     // buraya api isteği gelecek
@@ -28,21 +27,21 @@ class AppointmentProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void fetchAppointments() {
+  void fetchEmployes() {
     _isLoading = true;
     notifyListeners();
     // buraya api isteği gelecek
     _isLoading = false;
     notifyListeners();
   }
-  void updateAppointment(Appointment appointment) {
+  void updateEmploye(Employe employe) {
     _isLoading = true;
     notifyListeners();
     // buraya api isteği gelecek
     _isLoading = false;
     notifyListeners();
   }
-  void deleteAppointment(Appointment appointment) {
+  void deleteEmploye(Employe employe) {
     _isLoading = true;
     notifyListeners();
     // buraya api isteği gelecek

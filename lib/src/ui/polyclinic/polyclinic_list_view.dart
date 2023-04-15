@@ -1,26 +1,25 @@
-import 'package:demo/src/data/models/analysis.dart';
+import 'package:demo/src/data/models/polyclinic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-
-class AnalysisListView extends StatefulWidget {
-  const AnalysisListView({super.key});
+class PolyclinicListView extends StatefulWidget {
+  const PolyclinicListView({super.key});
 
   @override
-  State<AnalysisListView> createState() => _AnalysisListViewState();
+  State<PolyclinicListView> createState() => _PolyclinicListViewState();
 }
 
-class _AnalysisListViewState extends State<AnalysisListView> {
+class _PolyclinicListViewState extends State<PolyclinicListView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late var analysis2 = <Analysis>[];
+  late var polyclinic2 = <Polyclinic>[];
 
   @override
   Widget build(BuildContext context) {
-    // analysis().then(
+    // polyclinic().then(
     //   (value) {
     //     setState(() {
-    //       analysis2 = value;
+    //       polyclinic2 = value;
     //     });
     //   },
     // );
@@ -28,10 +27,10 @@ class _AnalysisListViewState extends State<AnalysisListView> {
       body: ListView.builder(
         itemBuilder: (context, index) {
           return Container(
-            child: Text(analysis2[index].finishdate.toString()),
+            child: Text(polyclinic2[index].employeList.toString()),
           );
         },
-        itemCount: analysis2.length,
+        itemCount: polyclinic2.length,
       ),
     );
   }

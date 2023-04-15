@@ -1,26 +1,25 @@
-import 'package:demo/src/data/models/analysis.dart';
+import 'package:demo/src/data/models/treatment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-
-class AnalysisListView extends StatefulWidget {
-  const AnalysisListView({super.key});
+class TreatmentListView extends StatefulWidget {
+  const TreatmentListView({super.key});
 
   @override
-  State<AnalysisListView> createState() => _AnalysisListViewState();
+  State<TreatmentListView> createState() => _TreatmentListViewState();
 }
 
-class _AnalysisListViewState extends State<AnalysisListView> {
+class _TreatmentListViewState extends State<TreatmentListView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late var analysis2 = <Analysis>[];
+  late var treatment2 = <Treatment>[];
 
   @override
   Widget build(BuildContext context) {
-    // analysis().then(
+    // treatment().then(
     //   (value) {
     //     setState(() {
-    //       analysis2 = value;
+    //       appointment2 = value;
     //     });
     //   },
     // );
@@ -28,10 +27,10 @@ class _AnalysisListViewState extends State<AnalysisListView> {
       body: ListView.builder(
         itemBuilder: (context, index) {
           return Container(
-            child: Text(analysis2[index].finishdate.toString()),
+            child: Text(treatment2[index].toString()),
           );
         },
-        itemCount: analysis2.length,
+        itemCount: treatment2.length,
       ),
     );
   }

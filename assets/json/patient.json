@@ -1,0 +1,74 @@
+{
+  "patients": [
+    {
+      "tc": 31657253484,
+      "name": "Joel",
+      "surname": "Boultwood",
+      "birthDate": "8/17/2022",
+      "gender": true
+    },
+    {
+      "tc": 29889751081,
+      "name": "Petronille",
+      "surname": "Pavis",
+      "birthDate": "9/13/2022",
+      "gender": false
+    },
+    {
+      "tc": 36162449765,
+      "name": "Alec",
+      "surname": "Copo",
+      "birthDate": "12/14/2022",
+      "gender": false
+    },
+    {
+      "tc": 10493853288,
+      "name": "Skippie",
+      "surname": "Rossi",
+      "birthDate": "12/1/2022",
+      "gender": true
+    },
+    {
+      "tc": 90566311266,
+      "name": "Celisse",
+      "surname": "Mummery",
+      "birthDate": "5/3/2022",
+      "gender": true
+    },
+    {
+      "tc": 58148552657,
+      "name": "Abraham",
+      "surname": "Ciardo",
+      "birthDate": "6/6/2022",
+      "gender": true
+    },
+    {
+      "tc": 12132526632,
+      "name": "Domini",
+      "surname": "Clampe",
+      "birthDate": "12/2/2022",
+      "gender": true
+    },
+    {
+      "tc": 92996732926,
+      "name": "Luciano",
+      "surname": "Kenneway",
+      "birthDate": "2/14/2023",
+      "gender": false
+    },
+    {
+      "tc": 54280034441,
+      "name": "Gertie",
+      "surname": "Coole",
+      "birthDate": "2/22/2023",
+      "gender": true
+    },
+    {
+      "tc": 19997043046,
+      "name": "Richardo",
+      "surname": "Becker",
+      "birthDate": "7/29/2022",
+      "gender": true
+    }
+  ]
+}

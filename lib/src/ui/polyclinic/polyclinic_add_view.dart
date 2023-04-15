@@ -1,21 +1,20 @@
-import 'package:demo/src/data/models/patient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class PatientAddView extends StatefulWidget {
-  const PatientAddView({super.key});
+class PolyclinicAddView extends StatefulWidget {
+  const PolyclinicAddView({super.key});
 
   @override
-  State<PatientAddView> createState() => _PatientAddViewState();
+  State<PolyclinicAddView> createState() => _PolyclinicAddViewState();
 }
 
-class _PatientAddViewState extends State<PatientAddView> {
+class _PolyclinicAddViewState extends State<PolyclinicAddView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    patients();
+    // patients();
     return Scaffold(
       body: Form(
         key: _formKey,
@@ -23,7 +22,7 @@ class _PatientAddViewState extends State<PatientAddView> {
           children: [
             TextFormField(
               decoration: const InputDecoration(
-                hintText: 'Tcnizi girin',
+                hintText: 'Çalışan seçiniz',
               ),
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
@@ -31,26 +30,6 @@ class _PatientAddViewState extends State<PatientAddView> {
                 }
                 return null;
               },
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Adınızı girin',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Soyadınız girin',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Cinsiyetinizi girin',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Doğum tarihinizi girin',
-              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),

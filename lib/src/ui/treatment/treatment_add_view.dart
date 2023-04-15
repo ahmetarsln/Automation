@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class PatientAddView extends StatefulWidget {
-  const PatientAddView({super.key});
+class TreatmentAddView extends StatefulWidget {
+  const TreatmentAddView({super.key});
 
   @override
-  State<PatientAddView> createState() => _PatientAddViewState();
+  State<TreatmentAddView> createState() => _TreatmentAddViewState();
 }
 
-class _PatientAddViewState extends State<PatientAddView> {
+class _TreatmentAddViewState extends State<TreatmentAddView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -23,7 +23,7 @@ class _PatientAddViewState extends State<PatientAddView> {
           children: [
             TextFormField(
               decoration: const InputDecoration(
-                hintText: 'Tcnizi girin',
+                hintText: 'başlangıç tarihi',
               ),
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
@@ -34,22 +34,17 @@ class _PatientAddViewState extends State<PatientAddView> {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                hintText: 'Adınızı girin',
+                hintText: 'Bitiş tarihi',
               ),
             ),
             TextFormField(
               decoration: const InputDecoration(
-                hintText: 'Soyadınız girin',
+                hintText: 'Randevu Giriniz',
               ),
             ),
             TextFormField(
               decoration: const InputDecoration(
-                hintText: 'Cinsiyetinizi girin',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Doğum tarihinizi girin',
+                hintText: 'Tedavi notu giriniz',
               ),
             ),
             Padding(

@@ -1,25 +1,25 @@
-import 'package:demo/src/data/models/patient.dart';
+import 'package:demo/src/data/models/employe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class PatientListView extends StatefulWidget {
-  const PatientListView({super.key});
+class EmployeListView extends StatefulWidget {
+  const EmployeListView({super.key});
 
   @override
-  State<PatientListView> createState() => _PatientListViewState();
+  State<EmployeListView> createState() => _EmployeListViewState();
 }
 
-class _PatientListViewState extends State<PatientListView> {
+class _EmployeListViewState extends State<EmployeListView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late var patient2 = <Patient>[];
+  late var employe2 = <Employe>[];
 
   @override
   Widget build(BuildContext context) {
-    patients().then(
+    employes().then(
       (value) {
         setState(() {
-          patient2 = value;
+          employe2 = value;
         });
       },
     );
@@ -27,10 +27,10 @@ class _PatientListViewState extends State<PatientListView> {
       body: ListView.builder(
         itemBuilder: (context, index) {
           return Container(
-            child: Text(patient2[index].tc.toString()),
+            child: Text(employe2[index].tc.toString()),
           );
         },
-        itemCount: patient2.length,
+        itemCount: employe2.length,
       ),
     );
   }
