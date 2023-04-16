@@ -1,7 +1,12 @@
 import 'package:demo/src/data/models/employe.dart';
 import 'package:demo/src/data/models/patient.dart';
 
+import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/services.dart' show rootBundle;
+
 class Prescription {
+  String? id;
   List<String>? medicationNames;
   DateTime? date;
   Employe? employe;
@@ -30,13 +35,13 @@ class Prescription {
   }
 }
 
-// final prescription = () async {
-//   var input = await File('assets/json/appointment.json').readAsString();
-//   var map = jsonDecode(input);
-//   var temp = map['prescription'];
-//   var result = <Prescription>[];
-//   for (var element in temp) {
-//     result.add(Prescription.fromJson(element));
-//   }
-//   return result;
-// };
+final prescriptions = () async {
+  var input = await rootBundle.loadString('assets/json/prescription.json');
+  var map = jsonDecode(input);
+  var temp = map['prescriptions'];
+  var result = <Prescription>[];
+  for (var element in temp) {
+    result.add(Prescription.fromJson(element));
+  }
+  return result;
+};

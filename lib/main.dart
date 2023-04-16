@@ -18,11 +18,11 @@ import 'firebase_options.dart';
 import 'package:demo/src/ui/treatment/treatment_add_view.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

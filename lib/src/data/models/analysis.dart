@@ -1,4 +1,7 @@
 import 'package:demo/src/data/models/patient.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/services.dart' show rootBundle;
 
 class Analysis {
   String? id;
@@ -34,13 +37,13 @@ class Analysis {
   }
 }
 
-// final analysis = () async {
-//   // var input = await File('assets/json/appointment.json').readAsString();
-//   var map = jsonDecode(input);
-//   var temp = map['analysis'];
-//   var result = <Analysis>[];
-//   for (var element in temp) {
-//     result.add(Analysis.fromJson(element));
-//   }
-//   return result;
-// };
+final appointments = () async {
+  var input = await rootBundle.loadString('assets/json/analysis.json');
+  var map = jsonDecode(input);
+  var temp = map['analyses'];
+  var result = <Analysis>[];
+  for (var element in temp) {
+    result.add(Analysis.fromJson(element));
+  }
+  return result;
+};

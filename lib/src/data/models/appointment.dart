@@ -2,12 +2,14 @@ import 'package:demo/src/data/models/employe.dart';
 import 'package:demo/src/data/models/patient.dart';
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/services.dart' show rootBundle;
 
 class Appointment {
   String? startDate;
   String? endDate;
   Employe? employe;
   Patient? patient;
+  String? id;
 
   Appointment(
       {required this.startDate,
@@ -33,7 +35,7 @@ class Appointment {
 }
 
 final appointments = () async {
-  var input = await File('assets/json/appointment.json').readAsString();
+  var input = await rootBundle.loadString('assets/json/appointment.json');
   var map = jsonDecode(input);
   var temp = map['appointments'];
   var result = <Appointment>[];

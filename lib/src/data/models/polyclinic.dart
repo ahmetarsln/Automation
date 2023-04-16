@@ -2,6 +2,7 @@ import 'package:demo/src/data/models/employe.dart';
 
 class Polyclinic {
   List<Employe>? employeList;
+  String? id;
 
   Polyclinic({required this.employeList});
 

@@ -9,6 +9,9 @@ class Patient {
   String? surname;
   String? birthDate;
   bool? gender;
+  String? id;
+
+
   Patient(
       {required this.tc,
       required this.name,

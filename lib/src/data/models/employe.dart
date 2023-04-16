@@ -9,6 +9,7 @@ class Employe {
   String? birthDate;
   bool? gender;
   String? department;
+  String? id;
 
   Employe(
       {required this.name,

@@ -1,12 +1,12 @@
 {
   "patients": [
-    {
+   {
       "tc": 31657253484,
       "name": "Joel",
       "surname": "Boultwood",
       "birthDate": "8/17/2022",
       "gender": true
-    },
+    }, 
     {
       "tc": 29889751081,
       "name": "Petronille",
