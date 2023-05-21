@@ -1,7 +1,12 @@
 import 'package:demo/src/data/models/treatment.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/repository/treatment_repository.dart';
+
 class TreatmentProvider extends ChangeNotifier {
+  final _treatmentRepository = TreatmentRepository();
+  var error;
+
   List<Treatment> _treatmentList = [];
   Treatment? _currentTreatment;
   bool _isLoading = true;
@@ -10,6 +15,9 @@ class TreatmentProvider extends ChangeNotifier {
     _treatmentList = value;
     notifyListeners();
   }
+
+  Treatment? get CurrentTreatment => _currentTreatment;
+
   void changeTreatment(Treatment treatment) {
     _isLoading = true;
     notifyListeners();
@@ -21,30 +29,53 @@ class TreatmentProvider extends ChangeNotifier {
   void fetchTreatment(String id) {
     _isLoading = true;
     notifyListeners();
-    // buraya api isteği gelecek
-    _isLoading = false;
-    notifyListeners();
+    _treatmentRepository.getTreatment(id).then((value) {
+      _currentTreatment = Treatment.fromJson(value.data()!);
+    }).catchError((e) {
+      error = e;
+    }).whenComplete(() => {_isLoading = false, notifyListeners()});
   }
 
   void fetchTreatments() {
     _isLoading = true;
     notifyListeners();
-    // buraya api isteği gelecek
-    _isLoading = false;
-    notifyListeners();
+    _treatmentRepository.getTreatments().then((value) {
+      _treatmentList = [];
+      for (var element in value.docs) {
+        _treatmentList.add(Treatment.fromJson(element.data()));
+      }
+    }).catchError((e) {
+      error = e;
+    }).whenComplete(() => {_isLoading = false, notifyListeners()});
   }
+
   void updateTreatment(Treatment treatment) {
     _isLoading = true;
     notifyListeners();
-    // buraya api isteği gelecek
-    _isLoading = false;
-    notifyListeners();
+    _treatmentRepository.updateTreatment(treatment).then((value) {
+      _currentTreatment = treatment;
+    }).catchError((e) {
+      error = e;
+    }).whenComplete(() => {_isLoading = false, notifyListeners()});
   }
+
   void deleteTreatment(Treatment treatment) {
     _isLoading = true;
     notifyListeners();
-    // buraya api isteği gelecek
-    _isLoading = false;
+    _treatmentRepository.deleteTreatment(treatment.id!).then((value) {
+      _currentTreatment = null;
+    }).catchError((e) {
+      error = e;
+    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+  }
+
+  void addTreatment(Treatment treatment) {
+    _isLoading = true;
     notifyListeners();
+    _treatmentRepository.addTreatment(treatment).then((value) {
+      _currentTreatment = treatment;
+    }).catchError((e) {
+      error = e;
+    }).whenComplete(() => {_isLoading = false, notifyListeners()});
   }
 }

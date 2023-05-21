@@ -1,7 +1,9 @@
 import 'package:demo/src/data/models/polyclinic.dart';
+import 'package:demo/src/ui/polyclinic/polyclinic_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
 class PolyclinicListView extends StatefulWidget {
   const PolyclinicListView({super.key});
@@ -16,18 +18,26 @@ class _PolyclinicListViewState extends State<PolyclinicListView> {
 
   @override
   Widget build(BuildContext context) {
-    // polyclinic().then(
-    //   (value) {
-    //     setState(() {
-    //       polyclinic2 = value;
-    //     });
-    //   },
-    // );
+    polyclinic().then(
+      (value) {
+        setState(() {
+          polyclinic2 = value;
+        });
+      },
+    );
+    final polyclinicProvider = Provider.of<PolyclinicProvider>(context);
+
     return Scaffold(
       body: ListView.builder(
         itemBuilder: (context, index) {
-          return Container(
-            child: Text(polyclinic2[index].employeList.toString()),
+          return Card(
+            child: ListTile(
+              leading: FlutterLogo(size: 72.0),
+              title: Text(polyclinic2[index].name!),
+              subtitle: Text(polyclinic2[index].id!.toString()),
+              trailing: Icon(Icons.more_vert),
+              isThreeLine: true,
+            ),
           );
         },
         itemCount: polyclinic2.length,

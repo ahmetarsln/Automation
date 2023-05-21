@@ -2,7 +2,11 @@
 import 'package:demo/src/data/models/polyclinic.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/repository/polyclinic_repository.dart';
+
 class PolyclinicProvider extends ChangeNotifier {
+  final _polyclinicRepository = PolyclinicRepository();
+  var error;
   List<Polyclinic> _polyclinicList = [];
   Polyclinic? _currentPolyclinic;
   bool _isLoading = true;
@@ -11,6 +15,9 @@ class PolyclinicProvider extends ChangeNotifier {
     _polyclinicList = value;
     notifyListeners();
   }
+
+  Polyclinic? get CurrentPolyclinic => _currentPolyclinic;
+
   void changePolyclinic(Polyclinic polyclinic) {
     _isLoading = true;
     notifyListeners();
@@ -22,30 +29,51 @@ class PolyclinicProvider extends ChangeNotifier {
   void fetchPolyclinic(String id) {
     _isLoading = true;
     notifyListeners();
-    // buraya api isteği gelecek
-    _isLoading = false;
-    notifyListeners();
+    _polyclinicRepository.getPolyclinic(id).then((value) {
+      _currentPolyclinic = Polyclinic.fromJson(value.data()!);
+    }).catchError((e) {
+      error = e;
+    }).whenComplete(() => {_isLoading = false, notifyListeners()});
   }
 
   void fetchPolyclinics() {
     _isLoading = true;
     notifyListeners();
-    // buraya api isteği gelecek
-    _isLoading = false;
-    notifyListeners();
+    _polyclinicRepository.getPolyclinics().then((value) {
+      _polyclinicList = [];
+      for (var element in value.docs) {
+        _polyclinicList.add(Polyclinic.fromJson(element.data()));
+      }
+    }).catchError((e) {
+      error = e;
+    }).whenComplete(() => {_isLoading = false, notifyListeners()});
   }
   void updatePolyclinic(Polyclinic polyclinic) {
     _isLoading = true;
     notifyListeners();
-    // buraya api isteği gelecek
-    _isLoading = false;
-    notifyListeners();
+    _polyclinicRepository.updatePolyclinic(polyclinic).then((value) {
+      _currentPolyclinic = polyclinic;
+    }).catchError((e) {
+      error = e;
+    }).whenComplete(() => {_isLoading = false, notifyListeners()});
   }
   void deletePolyclinic(Polyclinic polyclinic) {
     _isLoading = true;
     notifyListeners();
-    // buraya api isteği gelecek
-    _isLoading = false;
+    _polyclinicRepository.deletePolyclinic(polyclinic.id!).then((value) {
+      _currentPolyclinic = polyclinic;
+    }).catchError((e) {
+      error = e;
+    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+  }
+
+  void addPolyclinic(Polyclinic polyclinic) {
+    _isLoading = true;
     notifyListeners();
+    _polyclinicRepository.addPolyclinic(polyclinic).then((value) {
+      _currentPolyclinic = polyclinic;
+    }).catchError((e) {
+      error = e;
+    }).whenComplete(() => {_isLoading = false, notifyListeners()});
   }
 }

@@ -1,7 +1,9 @@
 import 'package:demo/src/data/models/patient.dart';
+import 'package:demo/src/ui/analysis/analysis_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
 class AnalysisAddView extends StatefulWidget {
   const AnalysisAddView({super.key});
@@ -16,6 +18,7 @@ class _AnalysisAddViewState extends State<AnalysisAddView> {
   @override
   Widget build(BuildContext context) {
     patients();
+    final analysisProvider= Provider.of<AnalysisProvider>(context);
     return Scaffold(
       body: Form(
         key: _formKey,

@@ -1,31 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo/src/data/models/analysis.dart';
 import 'package:demo/src/data/models/appointment.dart';
 
 class AnalysisRepository {
-  final FirebaseFirestore _firestore;
-
-  AnalysisRepository(this._firestore);
-
-  getAnalysis(String id) {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  
+  
+  Future getAnalysis(String id ) {
     return _firestore.collection('analysis').doc(id).get();
   }
 
-  getAnalyses() {
+  Future getAnalyses() {
     return _firestore.collection('analysis').get();
   }
 
-  updateAnalysis(Appointment appointment) {
+  Future updateAnalysis(Analysis analysis) {
     return _firestore
         .collection('analysis')
-        .doc(appointment.id)
-        .update(appointment.toJson());
+        .doc(analysis.id)
+        .update(analysis.toJson());
   }
 
-  deleteAnalysis(String id) {
+  Future deleteAnalysis(String id) {
     return _firestore.collection('analysis').doc(id).delete();
   }
 
-  addAnalysis(Appointment appointment) {
-    return _firestore.collection('analysis').add(appointment.toJson());
+  Future addAnalysis(Analysis analysis ) {
+    return _firestore.collection('analysis').add(analysis.toJson());
   }
 }

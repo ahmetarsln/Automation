@@ -3,9 +3,7 @@ import 'package:demo/src/data/models/polyclinic.dart';
 
 class PolyclinicRepository {
 
-  final FirebaseFirestore _firestore;
-
-  PolyclinicRepository(this._firestore);
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   getPolyclinic(String id) {
     return _firestore.collection('polyclinics').doc(id).get();

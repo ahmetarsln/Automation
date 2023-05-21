@@ -3,9 +3,7 @@ import 'package:demo/src/data/models/prescription.dart';
 
 class PrescriptionRepository {
 
-  final FirebaseFirestore _firestore;
-
-  PrescriptionRepository(this._firestore);
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   getPrescription(String id) {
     return _firestore.collection('prescriptions').doc(id).get();
@@ -26,7 +24,7 @@ class PrescriptionRepository {
     return _firestore.collection('prescriptions').doc(id).delete();
   }
   
-  addPolyclinic(Prescription prescription) {
+  addPrescription(Prescription prescription) {
     return _firestore.collection('prescriptions').add(prescription.toJson());
   }
 }

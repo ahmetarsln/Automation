@@ -1,7 +1,9 @@
 import 'package:demo/src/data/models/patient.dart';
+import 'package:demo/src/ui/employe/employe_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
 class EmployeDeleteView extends StatefulWidget {
   const EmployeDeleteView({super.key});
@@ -16,6 +18,8 @@ class _EmployeDeleteViewState extends State<EmployeDeleteView> {
   @override
   Widget build(BuildContext context) {
     patients();
+    final employeProvider = Provider.of<EmployeProvider>(context);
+
     return Scaffold(
       body: Form(
         key: _formKey,

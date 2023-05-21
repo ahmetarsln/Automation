@@ -3,9 +3,7 @@ import 'package:demo/src/data/models/patient.dart';
 
 class PatientRepository {
 
-  final FirebaseFirestore _firestore;
-
-  PatientRepository(this._firestore);
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   getPatient(String id) {
     return _firestore.collection('patients').doc(id).get();

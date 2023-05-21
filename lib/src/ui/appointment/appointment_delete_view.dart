@@ -1,7 +1,9 @@
 import 'package:demo/src/data/models/patient.dart';
+import 'package:demo/src/ui/appointment/appointment_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
 class AppointmentDeleteView extends StatefulWidget {
   const AppointmentDeleteView({super.key});
@@ -16,6 +18,7 @@ class _AppointmentDeleteViewState extends State<AppointmentDeleteView> {
   @override
   Widget build(BuildContext context) {
     patients();
+    final appointmentProvider = Provider.of<AppointmentProvider>(context);
     return Scaffold(
       body: Form(
         key: _formKey,

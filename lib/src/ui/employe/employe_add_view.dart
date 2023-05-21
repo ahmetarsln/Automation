@@ -1,7 +1,10 @@
 import 'package:demo/src/data/models/patient.dart';
+import 'package:demo/src/ui/appointment/appointment_provider.dart';
+import 'package:demo/src/ui/employe/employe_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
 class EmployeAddView extends StatefulWidget {
   const EmployeAddView({super.key});
@@ -16,6 +19,8 @@ class _EmployeAddViewState extends State<EmployeAddView> {
   @override
   Widget build(BuildContext context) {
     patients();
+    final employeProvider = Provider.of<EmployeProvider>(context);
+
     return Scaffold(
       body: Form(
         key: _formKey,

@@ -8,12 +8,14 @@ import 'package:flutter/services.dart' show rootBundle;
 class Prescription {
   String? id;
   List<String>? medicationNames;
-  DateTime? date;
+  String? date;
   Employe? employe;
   Patient? patient;
 
   Prescription(
-      {required this.medicationNames,
+      {
+      required this.id,
+      required this.medicationNames,
       required this.date,
       required this.employe,
       required this.patient});

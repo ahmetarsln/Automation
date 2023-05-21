@@ -1,6 +1,8 @@
+import 'package:demo/src/ui/polyclinic/polyclinic_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
 class PolyclinicAddView extends StatefulWidget {
   const PolyclinicAddView({super.key});
@@ -15,6 +17,8 @@ class _PolyclinicAddViewState extends State<PolyclinicAddView> {
   @override
   Widget build(BuildContext context) {
     // patients();
+    final polyclinicProvider = Provider.of<PolyclinicProvider>(context);
+
     return Scaffold(
       body: Form(
         key: _formKey,

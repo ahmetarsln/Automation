@@ -1,7 +1,10 @@
 import 'package:demo/src/data/models/patient.dart';
+import 'package:demo/src/ui/patient/patient_provider.dart';
+import 'package:demo/src/ui/polyclinic/polyclinic_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
 class PolyclinicDeleteView extends StatefulWidget {
   const PolyclinicDeleteView({super.key});
@@ -16,6 +19,8 @@ class _PolyclinicDeleteViewState extends State<PolyclinicDeleteView> {
   @override
   Widget build(BuildContext context) {
     patients();
+    final polyclinicProvider = Provider.of<PolyclinicProvider>(context);
+
     return Scaffold(
       body: Form(
         key: _formKey,

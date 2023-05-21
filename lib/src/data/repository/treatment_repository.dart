@@ -2,10 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/src/data/models/treatment.dart';
 
 class TreatmentRepository {
-
-  final FirebaseFirestore _firestore;
-
-  TreatmentRepository(this._firestore);
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   getTreatment(String id) {
     return _firestore.collection('treatments').doc(id).get();

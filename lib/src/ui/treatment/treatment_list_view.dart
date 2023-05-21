@@ -1,7 +1,9 @@
 import 'package:demo/src/data/models/treatment.dart';
+import 'package:demo/src/ui/treatment/treatment_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
 class TreatmentListView extends StatefulWidget {
   const TreatmentListView({super.key});
@@ -16,18 +18,26 @@ class _TreatmentListViewState extends State<TreatmentListView> {
 
   @override
   Widget build(BuildContext context) {
-    // treatment().then(
-    //   (value) {
-    //     setState(() {
-    //       appointment2 = value;
-    //     });
-    //   },
-    // );
+    treatment().then(
+      (value) {
+        setState(() {
+          treatment2 = value;
+        });
+      },
+    );
+    final treatmentProvider = Provider.of<TreatmentProvider>(context);
+
     return Scaffold(
       body: ListView.builder(
         itemBuilder: (context, index) {
-          return Container(
-            child: Text(treatment2[index].toString()),
+          return Card(
+            child: ListTile(
+              leading: FlutterLogo(size: 72.0),
+              title: Text(treatment2[index].notes![0]),
+              subtitle: Text(treatment2[index].startDate!.toString()),
+              trailing: Icon(Icons.more_vert),
+              isThreeLine: true,
+            ),
           );
         },
         itemCount: treatment2.length,

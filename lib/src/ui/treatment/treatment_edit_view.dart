@@ -1,13 +1,14 @@
 import 'package:demo/src/data/models/patient.dart';
+import 'package:demo/src/ui/treatment/treatment_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
 import '../../data/models/appointment.dart';
 
 class TreatmentEditView extends StatefulWidget {
-  final Appointment appointment;
-  const TreatmentEditView({super.key, required this.appointment});
+  const TreatmentEditView({super.key});
   @override
   State<TreatmentEditView> createState() => _TreatmentEditViewState();
 }
@@ -17,13 +18,17 @@ class _TreatmentEditViewState extends State<TreatmentEditView> {
 
   @override
   Widget build(BuildContext context) {
+    final treatmentProvider = Provider.of<TreatmentProvider>(context);
+
     return Scaffold(
       body: Form(
         key: _formKey,
         child: Column(
           children: [
             TextFormField(
-              initialValue: widget.appointment.startDate.toString(),
+              initialValue: Provider.of<TreatmentProvider>(context)
+                  .CurrentTreatment!
+                  .startDate,
               decoration: const InputDecoration(
                 hintText: 'Başlangıç tarihi',
               ),
@@ -35,7 +40,9 @@ class _TreatmentEditViewState extends State<TreatmentEditView> {
               },
             ),
             TextFormField(
-              initialValue: widget.appointment.endDate.toString(),
+              initialValue: Provider.of<TreatmentProvider>(context)
+                  .CurrentTreatment!
+                  .endDate,
               decoration: const InputDecoration(
                 hintText: 'Bitiş tarihi',
               ),
@@ -47,7 +54,9 @@ class _TreatmentEditViewState extends State<TreatmentEditView> {
               },
             ),
             TextFormField(
-              initialValue: widget.appointment.patient!.name,
+              initialValue: Provider.of<TreatmentProvider>(context)
+                  .CurrentTreatment!
+                  .startDate,
               decoration: const InputDecoration(
                 hintText: 'Randevular',
               ),
@@ -59,7 +68,9 @@ class _TreatmentEditViewState extends State<TreatmentEditView> {
               },
             ),
             TextFormField(
-              initialValue: widget.appointment.patient!.name,
+              initialValue: Provider.of<TreatmentProvider>(context)
+                  .CurrentTreatment!
+                  .endDate,
               decoration: const InputDecoration(
                 hintText: 'Notlar',
               ),

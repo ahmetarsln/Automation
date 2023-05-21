@@ -1,13 +1,14 @@
 import 'package:demo/src/data/models/patient.dart';
+import 'package:demo/src/ui/appointment/appointment_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
 import '../../data/models/appointment.dart';
 
 class AppointmentEditView extends StatefulWidget {
-  final Appointment appointment;
-  const AppointmentEditView({super.key, required this.appointment});
+  const AppointmentEditView({super.key});
   @override
   State<AppointmentEditView> createState() => _AppointmentEditViewState();
 }
@@ -17,13 +18,15 @@ class _AppointmentEditViewState extends State<AppointmentEditView> {
 
   @override
   Widget build(BuildContext context) {
+    final appointmentProvider = Provider.of<AppointmentProvider>(context);
+
     return Scaffold(
       body: Form(
         key: _formKey,
         child: Column(
           children: [
             TextFormField(
-              initialValue: widget.appointment.startDate.toString(),
+              initialValue: Provider.of(context).startDate!.toString(),
               decoration: const InputDecoration(
                 hintText: 'Tcnizi girin',
               ),

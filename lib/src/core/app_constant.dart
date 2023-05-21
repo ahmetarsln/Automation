@@ -23,6 +23,7 @@ enum TimerStatus {
   play,
   pause,
 }
+
 enum Gender {
   bayan,
   bay,
@@ -36,6 +37,45 @@ enum DialogType {
   over,
   pause,
   exit,
+}
+
+class RoutesKeys {
+  static const String home ="/";
+  
+  static const String analysisList = "/analysis";
+  static const String analysisNew = "/analysis/new";
+  static const String analysisEdit = "/analysis/edit";
+  static const String analysisDelete = "/analysis/delete";
+
+  static const String appointmentList = "/appointment";
+  static const String appointmentNew = "/appointment/new";
+  static const String appointmentEdit = "/appointment/edit";
+  static const String appointmentDelete = "/appointment/delete";
+
+  static const String employeList = "/employe";
+  static const String employeNew = "/employe/new";
+  static const String employeEdit = "/employe/edit";
+  static const String employeDelete = "/employe/delete";
+
+  static const String patientList = "/patient";
+  static const String patientNew = "/patient/new";
+  static const String patientEdit = "/patient/edit";
+  static const String patientDelete = "/patient/delete";
+
+  static const String polyclinicList = "/polyclinic";
+  static const String polyclinicNew = "/polyclinic/new";
+  static const String polyclinicEdit = "/polyclinic/edit";
+  static const String polyclinicDelete = "/polyclinic/delete";
+
+  static const String prescriptionList = "/prescription";
+  static const String prescriptionNew = "/prescription/new";
+  static const String prescriptionEdit = "/prescription/edit";
+  static const String prescriptionDelete = "/prescription/delete";
+
+  static const String treatmentList = "/treatment";
+  static const String treatmentNew = "/treatment/new";
+  static const String treatmentEdit = "/treatment/edit";
+  static const String treatmentDelete = "/treatment/delete";
 }
 
 class KeyUtil {
@@ -56,8 +96,6 @@ class KeyUtil {
   static const String picturePuzzle = 'PicturePuzzle';
   static const String mathGrid = 'MathGrid';
   static const String numberPyramid = "NumberPyramid";
-
-  
 
   static int getTimeUtil(
     GameCategoryType gameCategoryType,

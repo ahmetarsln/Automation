@@ -2,10 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/src/data/models/appointment.dart';
 
 class AppointmentRepository {
-  final FirebaseFirestore _firestore;
-
-
-  AppointmentRepository(this._firestore);
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   getAppointment(String id) {
     return _firestore.collection('appointments').doc(id).get();

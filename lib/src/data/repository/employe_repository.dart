@@ -3,9 +3,7 @@ import 'package:demo/src/data/models/appointment.dart';
 import 'package:demo/src/data/models/employe.dart';
 
 class EmployeRepository {
-  final FirebaseFirestore _firestore;
-
-  EmployeRepository(this._firestore);
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   getEmploye(String id) {
     return _firestore.collection('employe').doc(id).get();

@@ -1,11 +1,12 @@
 import 'package:demo/src/data/models/appointment.dart';
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/services.dart' show rootBundle;
 
 class Treatment {
   String? id;
-  DateTime? startDate;
-  DateTime? endDate;
+  String? startDate;
+  String? endDate;
   List<Appointment>? appointments;
   List<String>? notes;
 
@@ -32,13 +33,13 @@ class Treatment {
   }
 }
 
-// final treatment = () async {
-//   var input = await File('assets/json/employe.json').readAsString();
-//   var map = jsonDecode(input);
-//   var temp = map['treatment'];
-//   var result = <Treatment>[];
-//   for (var element in temp) {
-//     result.add(Treatment.fromJson(element));
-//   }
-//   return result;
-// };
+final treatment = () async {
+  var input = await rootBundle.loadString('assets/json/treatment.json');
+  var map = jsonDecode(input);
+  var temp = map['treatment'];
+  var result = <Treatment>[];
+  for (var element in temp) {
+    result.add(Treatment.fromJson(element));
+  }
+  return result;
+};

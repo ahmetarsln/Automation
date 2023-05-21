@@ -1,7 +1,9 @@
 import 'package:demo/src/data/models/employe.dart';
+import 'package:demo/src/ui/employe/employe_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
 class EmployeListView extends StatefulWidget {
   const EmployeListView({super.key});
@@ -11,7 +13,6 @@ class EmployeListView extends StatefulWidget {
 }
 
 class _EmployeListViewState extends State<EmployeListView> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late var employe2 = <Employe>[];
 
   @override
@@ -23,6 +24,8 @@ class _EmployeListViewState extends State<EmployeListView> {
         });
       },
     );
+    final employeProvider = Provider.of<EmployeProvider>(context);
+
     return Scaffold(
       body: ListView.builder(
         itemBuilder: (context, index) {

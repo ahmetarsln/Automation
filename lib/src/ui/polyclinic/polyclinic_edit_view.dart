@@ -1,13 +1,14 @@
 import 'package:demo/src/data/models/patient.dart';
+import 'package:demo/src/ui/polyclinic/polyclinic_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
 import '../../data/models/appointment.dart';
 
 class PolyclinicEditView extends StatefulWidget {
-  final Appointment appointment;
-  const PolyclinicEditView({super.key, required this.appointment});
+  const PolyclinicEditView({super.key});
   @override
   State<PolyclinicEditView> createState() => _PolyclinicEditViewState();
 }
@@ -17,13 +18,17 @@ class _PolyclinicEditViewState extends State<PolyclinicEditView> {
 
   @override
   Widget build(BuildContext context) {
+    final polyclinicProvider = Provider.of<PolyclinicProvider>(context);
+
     return Scaffold(
       body: Form(
         key: _formKey,
         child: Column(
           children: [
             TextFormField(
-              initialValue: widget.appointment.startDate.toString(),
+              initialValue: Provider.of<PolyclinicProvider>(context)
+                  .CurrentPolyclinic!
+                  .name,
               decoration: const InputDecoration(
                 hintText: 'Tcnizi girin',
               ),

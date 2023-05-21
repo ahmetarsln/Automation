@@ -5,23 +5,23 @@ import 'package:flutter/services.dart' show rootBundle;
 
 class Analysis {
   String? id;
-  Map<String, String>? parameters;
+  String? parameters;
   Patient? patient;
-  DateTime? finishdate;
-  DateTime? notificationDate;
+  String? finishdate;
+  String? notificationDate;
 
   Analysis(
       {this.id,
       required this.parameters,
       required this.patient,
       this.finishdate,
-      DateTime? notificationDate})
-      : notificationDate = notificationDate ?? DateTime.now();
+      this.notificationDate
+      });
 
   Analysis.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     parameters = json["parameters"];
-    patient = json["patient"];
+    patient = Patient.fromJson(json["patient"]);
     finishdate = json["finishdate"];
     notificationDate = json["notificationDate"];
   }
@@ -37,7 +37,7 @@ class Analysis {
   }
 }
 
-final appointments = () async {
+final analyses = () async {
   var input = await rootBundle.loadString('assets/json/analysis.json');
   var map = jsonDecode(input);
   var temp = map['analyses'];
