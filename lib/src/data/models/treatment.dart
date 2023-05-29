@@ -19,8 +19,9 @@ class Treatment {
   Treatment.fromJson(Map<String, dynamic> json) {
     startDate = json["startDate"];
     endDate = json["endDate"];
-    appointments = [Appointment.fromJson(json["appointments"])];
-    notes = json["notes"];
+    appointments = List.generate(json["appointments"].length,
+        (index) => Appointment.fromJson(json["appointments"][index]));
+    notes = [json["notes"]];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -36,7 +37,7 @@ class Treatment {
 final treatment = () async {
   var input = await rootBundle.loadString('assets/json/treatment.json');
   var map = jsonDecode(input);
-  var temp = map['treatment'];
+  var temp = map['treatments'];
   var result = <Treatment>[];
   for (var element in temp) {
     result.add(Treatment.fromJson(element));

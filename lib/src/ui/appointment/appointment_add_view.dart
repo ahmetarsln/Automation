@@ -1,3 +1,5 @@
+import 'package:demo/src/core/custom_app_bar.dart';
+import 'package:demo/src/core/custom_drawer.dart';
 import 'package:demo/src/data/models/patient.dart';
 import 'package:demo/src/ui/analysis/analysis_provider.dart';
 import 'package:demo/src/ui/appointment/appointment_provider.dart';
@@ -22,6 +24,8 @@ class _AppointmentAddViewState extends State<AppointmentAddView> {
     final appointmentProvider = Provider.of<AppointmentProvider>(context);
 
     return Scaffold(
+      appBar: const CustomAppBar(title: "Yeni Randevu"),
+      drawer: const CustomDrawer(),
       body: Form(
         key: _formKey,
         child: Column(

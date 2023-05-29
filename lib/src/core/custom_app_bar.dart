@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key})
+  final title;
+  const CustomAppBar({super.key, required this.title})
       : preferredSize = const Size.fromHeight(kToolbarHeight);
 
   @override
@@ -15,7 +16,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text("Ana Sayfa"),
+      title: Text(widget.title),
     );
   }
 }

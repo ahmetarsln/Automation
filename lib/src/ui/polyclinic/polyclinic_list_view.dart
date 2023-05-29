@@ -1,3 +1,5 @@
+import 'package:demo/src/core/custom_app_bar.dart';
+import 'package:demo/src/core/custom_drawer.dart';
 import 'package:demo/src/data/models/polyclinic.dart';
 import 'package:demo/src/ui/polyclinic/polyclinic_provider.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,8 @@ class _PolyclinicListViewState extends State<PolyclinicListView> {
     final polyclinicProvider = Provider.of<PolyclinicProvider>(context);
 
     return Scaffold(
+      appBar: const CustomAppBar(title: "Poliklinikler"),
+      drawer: const CustomDrawer(),
       body: ListView.builder(
         itemBuilder: (context, index) {
           return Card(

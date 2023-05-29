@@ -1,3 +1,5 @@
+import 'package:demo/src/core/custom_app_bar.dart';
+import 'package:demo/src/core/custom_drawer.dart';
 import 'package:demo/src/data/models/patient.dart';
 import 'package:demo/src/ui/patient/patient_provider.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,8 @@ class _PatientListViewState extends State<PatientListView> {
     final patientProvider = Provider.of<PatientProvider>(context);
 
     return Scaffold(
+      appBar: const CustomAppBar(title: "Hastalar Listesi"),
+      drawer: const CustomDrawer(),
       body: ListView.builder(
         itemBuilder: (context, index) {
           return Card(

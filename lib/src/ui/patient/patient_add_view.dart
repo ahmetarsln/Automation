@@ -1,3 +1,5 @@
+import 'package:demo/src/core/custom_app_bar.dart';
+import 'package:demo/src/core/custom_drawer.dart';
 import 'package:demo/src/data/models/patient.dart';
 import 'package:demo/src/ui/patient/patient_provider.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,8 @@ class _PatientAddViewState extends State<PatientAddView> {
     final patientProvider = Provider.of<PatientProvider>(context);
 
     return Scaffold(
+      appBar: const CustomAppBar(title: "Yeni Hasta"),
+      drawer: const CustomDrawer(),
       body: Form(
         key: _formKey,
         child: Column(

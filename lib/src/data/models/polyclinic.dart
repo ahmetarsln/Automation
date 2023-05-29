@@ -27,7 +27,7 @@ class Polyclinic {
 final polyclinic = () async {
   var input = await rootBundle.loadString('assets/json/polyclinic.json');
   var map = jsonDecode(input);
-  var temp = map['polyclinic'];
+  var temp = map['polyclinics'];
   var result = <Polyclinic>[];
   for (var element in temp) {
     result.add(Polyclinic.fromJson(element));

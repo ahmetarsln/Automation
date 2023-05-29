@@ -1,3 +1,4 @@
+import 'package:demo/src/core/app_constant.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -19,21 +20,45 @@ class CustomDrawer extends StatelessWidget {
             child: Text('Drawer Header'),
           ),
           ListTile(
-            leading: Icon(
-              Icons.home,
-            ),
-            title: const Text('Page 1'),
+            title: const Text('Tahlliler'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.of(context).pushNamed(RoutesKeys.analysisList);
             },
           ),
           ListTile(
-            leading: Icon(
-              Icons.train,
-            ),
-            title: const Text('Page 2'),
+            title: const Text('Randevular'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.of(context).pushNamed(RoutesKeys.appointmentList);
+            },
+          ),
+          ListTile(
+            title: const Text('Çalışanlar'),
+            onTap: () {
+              Navigator.of(context).pushNamed(RoutesKeys.employeList);
+            },
+          ),
+          ListTile(
+            title: const Text('Hastalar'),
+            onTap: () {
+              Navigator.of(context).pushNamed(RoutesKeys.patientList);
+            },
+          ),
+          ListTile(
+            title: const Text('Poliklinikler'),
+            onTap: () {
+              Navigator.of(context).pushNamed(RoutesKeys.polyclinicList);
+            },
+          ),
+          ListTile(
+            title: const Text('Reçeteler'),
+            onTap: () {
+              Navigator.of(context).pushNamed(RoutesKeys.prescriptionList);
+            },
+          ),
+          ListTile(
+            title: const Text('Tedaviler'),
+            onTap: () {
+              Navigator.of(context).pushNamed(RoutesKeys.treatmentList);
             },
           ),
         ],

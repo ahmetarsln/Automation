@@ -14,7 +14,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(title: "Ana Sayfa"),
       drawer: CustomDrawer(),
       body: Center(
         child: Text("Ana Sayfa"),
@@ -22,5 +22,3 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 }
-
-

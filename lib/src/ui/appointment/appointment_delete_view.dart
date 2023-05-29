@@ -1,3 +1,5 @@
+import 'package:demo/src/core/custom_app_bar.dart';
+import 'package:demo/src/core/custom_drawer.dart';
 import 'package:demo/src/data/models/patient.dart';
 import 'package:demo/src/ui/appointment/appointment_provider.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,8 @@ class _AppointmentDeleteViewState extends State<AppointmentDeleteView> {
     patients();
     final appointmentProvider = Provider.of<AppointmentProvider>(context);
     return Scaffold(
+      appBar: const CustomAppBar(title: "Randevu Silme"),
+      drawer: const CustomDrawer(),
       body: Form(
         key: _formKey,
         child: Column(

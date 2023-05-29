@@ -6,6 +6,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/custom_app_bar.dart';
+import '../../core/custom_drawer.dart';
+
 class AppointmentListView extends StatefulWidget {
   const AppointmentListView({super.key});
 
@@ -30,6 +33,8 @@ class _AppointmentListViewState extends State<AppointmentListView> {
     final appointmentProvider = Provider.of<AppointmentProvider>(context);
 
     return Scaffold(
+      appBar: const CustomAppBar(title: "Randevular"),
+      drawer: const CustomDrawer(),
       body: ListView.builder(
         itemBuilder: (context, index) {
           return Card(

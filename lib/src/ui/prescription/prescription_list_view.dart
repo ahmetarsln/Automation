@@ -1,3 +1,5 @@
+import 'package:demo/src/core/custom_app_bar.dart';
+import 'package:demo/src/core/custom_drawer.dart';
 import 'package:demo/src/data/models/prescription.dart';
 import 'package:demo/src/ui/prescription/prescription_provider.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,8 @@ class _PrescriptionListViewState extends State<PrescriptionListView> {
     final prescriptionProvider = Provider.of<PrescriptionProvider>(context);
 
     return Scaffold(
+      appBar: const CustomAppBar(title: "Reçeteler"),
+      drawer: const CustomDrawer(),
       body: ListView.builder(
         itemBuilder: (context, index) {
           return Card(

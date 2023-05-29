@@ -1,3 +1,5 @@
+import 'package:demo/src/core/custom_app_bar.dart';
+import 'package:demo/src/core/custom_drawer.dart';
 import 'package:demo/src/ui/polyclinic/polyclinic_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -20,6 +22,8 @@ class _PolyclinicAddViewState extends State<PolyclinicAddView> {
     final polyclinicProvider = Provider.of<PolyclinicProvider>(context);
 
     return Scaffold(
+      appBar: const CustomAppBar(title: "Yeni Poliklinik"),
+      drawer: const CustomDrawer(),
       body: Form(
         key: _formKey,
         child: Column(

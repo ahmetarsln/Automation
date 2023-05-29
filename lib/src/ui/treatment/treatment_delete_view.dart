@@ -1,3 +1,5 @@
+import 'package:demo/src/core/custom_app_bar.dart';
+import 'package:demo/src/core/custom_drawer.dart';
 import 'package:demo/src/data/models/patient.dart';
 import 'package:demo/src/ui/treatment/treatment_provider.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,8 @@ class _TreatmentDeleteViewState extends State<TreatmentDeleteView> {
     final treatmentProvider = Provider.of<TreatmentProvider>(context);
 
     return Scaffold(
+      appBar: const CustomAppBar(title: "Reçete Silme"),
+      drawer: const CustomDrawer(),
       body: Form(
         key: _formKey,
         child: Column(

@@ -1,3 +1,5 @@
+import 'package:demo/src/core/custom_app_bar.dart';
+import 'package:demo/src/core/custom_drawer.dart';
 import 'package:demo/src/data/models/patient.dart';
 import 'package:demo/src/ui/prescription/prescription_provider.dart';
 import 'package:demo/src/ui/treatment/treatment_provider.dart';
@@ -22,8 +24,14 @@ class _TreatmentAddViewState extends State<TreatmentAddView> {
     final treatmentProvider = Provider.of<TreatmentProvider>(context);
 
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => TreatmentProvider(),)],
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => TreatmentProvider(),
+        )
+      ],
       child: Scaffold(
+        appBar: const CustomAppBar(title: "Yeni Tedavi"),
+        drawer: const CustomDrawer(),
         body: Form(
           key: _formKey,
           child: Column(

@@ -5,6 +5,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/custom_app_bar.dart';
+import '../../core/custom_drawer.dart';
 import '../../data/models/appointment.dart';
 
 class AnalysisEditView extends StatefulWidget {
@@ -21,6 +23,8 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
     final analysisProvider = Provider.of<AnalysisProvider>(context);
 
     return Scaffold(
+      appBar: const CustomAppBar(title: "Tahlil Düzenleme"),
+      drawer: const CustomDrawer(),
       body: Form(
         key: _formKey,
         child: Column(

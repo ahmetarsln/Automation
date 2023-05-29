@@ -1,3 +1,5 @@
+import 'package:demo/src/core/custom_app_bar.dart';
+import 'package:demo/src/core/custom_drawer.dart';
 import 'package:demo/src/data/models/patient.dart';
 import 'package:demo/src/ui/employe/employe_provider.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,8 @@ class _EmployeEditViewState extends State<EmployeEditView> {
     final employeProvider = Provider.of<EmployeProvider>(context);
 
     return Scaffold(
+      appBar: const CustomAppBar(title: "Çalışan Düzenleme"),
+      drawer: const CustomDrawer(),
       body: Form(
         key: _formKey,
         child: Column(

@@ -1,3 +1,5 @@
+import 'package:demo/src/core/custom_app_bar.dart';
+import 'package:demo/src/core/custom_drawer.dart';
 import 'package:demo/src/data/models/analysis.dart';
 import 'package:demo/src/ui/analysis/analysis_provider.dart';
 import 'package:flutter/material.dart';
@@ -28,17 +30,18 @@ class _AnalysisListViewState extends State<AnalysisListView> {
     final analysisProvider = Provider.of<AnalysisProvider>(context);
 
     return Scaffold(
+      appBar: const CustomAppBar(title: "Tahliller"),
+      drawer: const CustomDrawer(),
       body: ListView.builder(
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
-              leading: FlutterLogo(size: 72.0),
+              leading: Icon(Icons.supervised_user_circle, size: 48),
               title: Text(analysis2[index].patient!.name! +
                   ' ' +
                   analysis2[index].patient!.surname!),
               subtitle: Text(analysis2[index].patient!.tc!.toString()),
-              trailing: Icon(Icons.more_vert),
-              isThreeLine: true,
+              trailing: Icon(Icons.delete),
             ),
           );
         },

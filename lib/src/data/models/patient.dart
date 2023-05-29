@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:intl/intl.dart';
 
@@ -10,7 +11,6 @@ class Patient {
   String? birthDate;
   bool? gender;
   String? id;
-
 
   Patient(
       {required this.tc,
@@ -37,7 +37,7 @@ class Patient {
 }
 
 final patients = () async {
-  var input = await File('assets/json/patient.json').readAsString();
+  var input = await rootBundle.loadString('assets/json/patient.json');
   var map = jsonDecode(input);
   var temp = map['patients'];
   var result = <Patient>[];

@@ -21,7 +21,7 @@ class Prescription {
       required this.patient});
 
   Prescription.fromJson(Map<String, dynamic> json) {
-    medicationNames = json["medicationNames"];
+    medicationNames = [json["medicationNames"]];
     date = json["date"];
     employe = Employe.fromJson(json["employe"]);
     patient = Patient.fromJson(json["patient"]);

@@ -5,6 +5,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/custom_app_bar.dart';
+import '../../core/custom_drawer.dart';
+
 class AnalysisDeleteView extends StatefulWidget {
   const AnalysisDeleteView({super.key});
 
@@ -20,6 +23,8 @@ class _AnalysisDeleteViewState extends State<AnalysisDeleteView> {
     patients();
     final analysisProvider = Provider.of<AnalysisProvider>(context);
     return Scaffold(
+      appBar: const CustomAppBar(title: "Tahlil Silme"),
+      drawer: const CustomDrawer(),
       body: Form(
         key: _formKey,
         child: Column(
