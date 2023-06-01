@@ -7,7 +7,7 @@ class AnalysisProvider extends ChangeNotifier {
   var error;
   List<Analysis> _analysisList = [];
   Analysis? _currentAnalysis;
-  bool _isLoading = true;
+  bool isLoading = true;
   List<Analysis> get analysisList => _analysisList;
 
   set analysisList(List<Analysis> value) {
@@ -15,28 +15,31 @@ class AnalysisProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Analysis? get CurrentAnalysis=> _currentAnalysis ;
+  Analysis? get CurrentAnalysis => _currentAnalysis;
 
   void changeAnalysis(Analysis analysis) {
-    _isLoading = true;
+    print(analysis);
+    isLoading = true;
+    print(isLoading);
     notifyListeners();
     _currentAnalysis = analysis;
-    _isLoading = false;
+    isLoading = false;
+    print(isLoading);
     notifyListeners();
   }
 
   void fetchAnalysis(String id) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _analysisRepository.getAnalysis(id).then((value) {
       _currentAnalysis = Analysis.fromJson(value.data()!);
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void fetchAnalyses() {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _analysisRepository.getAnalyses().then((value) {
       _analysisList = [];
@@ -45,36 +48,36 @@ class AnalysisProvider extends ChangeNotifier {
       }
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void updateAnalysis(Analysis analysis) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _analysisRepository.updateAnalysis(analysis).then((value) {
       _currentAnalysis = analysis;
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void deleteAnalysis(Analysis analysis) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _analysisRepository.deleteAnalysis(analysis.id!).then((value) {
       _analysisList.remove(analysis);
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void addAnalysis(Analysis analysis) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _analysisRepository.addAnalysis(analysis).then((value) {
       _analysisList.add(analysis);
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 }

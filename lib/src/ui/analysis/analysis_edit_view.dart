@@ -21,58 +21,68 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
   @override
   Widget build(BuildContext context) {
     final analysisProvider = Provider.of<AnalysisProvider>(context);
-
-    return Scaffold(
-      appBar: const CustomAppBar(title: "Tahlil Düzenleme"),
-      drawer: const CustomDrawer(),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            TextFormField(
-              initialValue: analysisProvider.CurrentAnalysis!.patient!.name!,
-              decoration: const InputDecoration(
-                hintText: 'Tcnizi girin',
+    print(analysisProvider.CurrentAnalysis);
+    return Consumer<AnalysisProvider>(
+      builder: (context, value, child) => value.isLoading
+          ? const Scaffold(
+              appBar: const CustomAppBar(title: "Tahlil Düzenleme"),
+              drawer: const CustomDrawer(),
+              body: Center(
+                child: Text("Yükleniyor"),
+              ))
+          : Scaffold(
+              appBar: const CustomAppBar(title: "Tahlil Düzenleme"),
+              drawer: const CustomDrawer(),
+              body: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      initialValue:
+                          value.CurrentAnalysis!.patient!.name!,
+                      decoration: const InputDecoration(
+                        hintText: 'Tcnizi girin',
+                      ),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: 'Adınızı girin',
+                      ),
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: 'Soyadınız girin',
+                      ),
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: 'Soyadınız girin',
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Validate will return true if the form is valid, or false if
+                          // the form is invalid.
+                          if (_formKey.currentState!.validate()) {
+                            // Process data.
+                            print("validation complete");
+                          }
+                        },
+                        child: const Text('Submit'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
             ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Adınızı girin',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Soyadınız girin',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Soyadınız girin',
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Validate will return true if the form is valid, or false if
-                  // the form is invalid.
-                  if (_formKey.currentState!.validate()) {
-                    // Process data.
-                    print("validation complete");
-                  }
-                },
-                child: const Text('Submit'),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
