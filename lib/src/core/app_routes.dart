@@ -48,206 +48,68 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const HomeView());
 
       case RoutesKeys.analysisNew:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                      create: (context) => AnalysisProvider())
-                ], child: const AnalysisAddView()));
+        return MaterialPageRoute(builder: (_) => const AnalysisAddView());
       case RoutesKeys.analysisList:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => AnalysisProvider(),
-                  )
-                ], child: const AnalysisListView()));
+        return MaterialPageRoute(builder: (_) => const AnalysisListView());
       case RoutesKeys.analysisEdit:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => AnalysisProvider(),
-                  )
-                ], child: const AnalysisEditView()));
+        return MaterialPageRoute(builder: (_) => const AnalysisEditView());
       case RoutesKeys.analysisDelete:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => AnalysisProvider(),
-                  )
-                ], child: const AnalysisDeleteView()));
+        return MaterialPageRoute(builder: (_) => const AnalysisDeleteView());
 
       case RoutesKeys.appointmentNew:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => AppointmentProvider(),
-                  )
-                ], child: const AppointmentAddView()));
+        return MaterialPageRoute(builder: (_) => const AppointmentAddView());
       case RoutesKeys.appointmentList:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => AppointmentProvider(),
-                  )
-                ], child: const AppointmentListView()));
+        return MaterialPageRoute(builder: (_) => const AppointmentListView());
       case RoutesKeys.appointmentEdit:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => AppointmentProvider(),
-                  )
-                ], child: const AppointmentEditView()));
+        return MaterialPageRoute(builder: (_) => const AppointmentEditView());
       case RoutesKeys.appointmentDelete:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => AppointmentProvider(),
-                  )
-                ], child: const AppointmentDeleteView()));
+        return MaterialPageRoute(builder: (_) => const AppointmentDeleteView());
 
       case RoutesKeys.employeNew:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => EmployeProvider(),
-                  )
-                ], child: const EmployeAddView()));
+        return MaterialPageRoute(builder: (_) => const EmployeAddView());
       case RoutesKeys.employeList:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => EmployeProvider(),
-                  )
-                ], child: const EmployeListView()));
+        return MaterialPageRoute(builder: (_) => const EmployeListView());
       case RoutesKeys.employeEdit:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => EmployeProvider(),
-                  )
-                ], child: const EmployeEditView()));
+        return MaterialPageRoute(builder: (_) => const EmployeEditView());
       case RoutesKeys.employeDelete:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => EmployeProvider(),
-                  )
-                ], child: const EmployeDeleteView()));
+        return MaterialPageRoute(builder: (_) => const EmployeDeleteView());
 
       case RoutesKeys.patientNew:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => PatientProvider(),
-                  )
-                ], child: const PatientAddView()));
+        return MaterialPageRoute(builder: (_) => const PatientAddView());
       case RoutesKeys.patientList:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => PatientProvider(),
-                  )
-                ], child: const PatientListView()));
+        return MaterialPageRoute(builder: (_) => const PatientListView());
       case RoutesKeys.patientEdit:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => PatientProvider(),
-                  )
-                ], child: const PatientEditView()));
+        return MaterialPageRoute(builder: (_) => const PatientEditView());
       case RoutesKeys.patientDelete:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => PatientProvider(),
-                  )
-                ], child: const PatientDeleteView()));
+        return MaterialPageRoute(builder: (_) => const PatientDeleteView());
 
       case RoutesKeys.polyclinicNew:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => PolyclinicProvider(),
-                  )
-                ], child: const PolyclinicAddView()));
+        return MaterialPageRoute(builder: (_) => const PolyclinicAddView());
       case RoutesKeys.polyclinicList:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => PolyclinicProvider(),
-                  )
-                ], child: const PolyclinicListView()));
+        return MaterialPageRoute(builder: (_) => const PolyclinicListView());
       case RoutesKeys.polyclinicEdit:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => PolyclinicProvider(),
-                  )
-                ], child: const PolyclinicEditView()));
+        return MaterialPageRoute(builder: (_) => const PolyclinicEditView());
       case RoutesKeys.polyclinicDelete:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => PolyclinicProvider(),
-                  )
-                ], child: const PolyclinicDeleteView()));
+        return MaterialPageRoute(builder: (_) => const PolyclinicDeleteView());
 
       case RoutesKeys.prescriptionNew:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => PrescriptionProvider(),
-                  )
-                ], child: const PrescriptionAddView()));
+        return MaterialPageRoute(builder: (_) => const PrescriptionAddView());
       case RoutesKeys.prescriptionList:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => PrescriptionProvider(),
-                  )
-                ], child: const PrescriptionListView()));
+        return MaterialPageRoute(builder: (_) => const PrescriptionListView());
       case RoutesKeys.prescriptionEdit:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => PrescriptionProvider(),
-                  )
-                ], child: const PrescriptionEditView()));
+        return MaterialPageRoute(builder: (_) => const PrescriptionEditView());
       case RoutesKeys.prescriptionDelete:
         return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => PrescriptionProvider(),
-                  )
-                ], child: const PrescriptionDeleteView()));
+            builder: (_) => const PrescriptionDeleteView());
 
       case RoutesKeys.treatmentNew:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => TreatmentProvider(),
-                  )
-                ], child: const TreatmentAddView()));
+        return MaterialPageRoute(builder: (_) => const TreatmentAddView());
       case RoutesKeys.treatmentList:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => TreatmentProvider(),
-                  )
-                ], child: const TreatmentListView()));
+        return MaterialPageRoute(builder: (_) => const TreatmentListView());
       case RoutesKeys.treatmentEdit:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => TreatmentProvider(),
-                  )
-                ], child: const TreatmentEditView()));
+        return MaterialPageRoute(builder: (_) => const TreatmentEditView());
       case RoutesKeys.treatmentDelete:
-        return MaterialPageRoute(
-            builder: (_) => MultiProvider(providers: [
-                  ChangeNotifierProvider(
-                    create: (context) => TreatmentProvider(),
-                  )
-                ], child: const TreatmentDeleteView()));
+        return MaterialPageRoute(builder: (_) => const TreatmentDeleteView());
 
       default:
         return MaterialPageRoute(

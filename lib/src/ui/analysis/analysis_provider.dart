@@ -17,6 +17,10 @@ class AnalysisProvider extends ChangeNotifier {
 
   Analysis? get CurrentAnalysis => _currentAnalysis;
 
+  Analysis? getAnalysis() {
+    return _currentAnalysis;
+  }
+
   void changeAnalysis(Analysis analysis) {
     print(analysis);
     isLoading = true;

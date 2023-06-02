@@ -8,17 +8,25 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
-class AnalysisListView extends StatelessWidget {
-  AnalysisListView({super.key});
+class AnalysisListView extends StatefulWidget {
+  const AnalysisListView({super.key});
 
+  @override
+  State<AnalysisListView> createState() => _AnalysisListViewState();
+}
+
+class _AnalysisListViewState extends State<AnalysisListView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   late var analysis2 = <Analysis>[];
 
   @override
   Widget build(BuildContext context) {
     analyses().then(
       (value) {
-        analysis2 = value;
+        setState(() {
+          analysis2 = value;
+        });
       },
     );
     final analysisProvider = Provider.of<AnalysisProvider>(context);

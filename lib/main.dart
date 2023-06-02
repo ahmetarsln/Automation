@@ -4,21 +4,29 @@ import 'package:demo/src/data/models/analysis.dart';
 import 'package:demo/src/data/models/employe.dart';
 import 'package:demo/src/data/models/patient.dart';
 import 'package:demo/src/ui/analysis/analysis_add_view.dart';
+import 'package:demo/src/ui/analysis/analysis_provider.dart';
 import 'package:demo/src/ui/appointment/appointment_add_view.dart';
 import 'package:demo/src/ui/appointment/appointment_delete_view.dart';
 import 'package:demo/src/ui/appointment/appointment_list_view.dart';
+import 'package:demo/src/ui/appointment/appointment_provider.dart';
 import 'package:demo/src/ui/employe/employe_add_view.dart';
 import 'package:demo/src/ui/employe/employe_list_view.dart';
+import 'package:demo/src/ui/employe/employe_provider.dart';
 import 'package:demo/src/ui/patient/patient_add_view.dart';
 import 'package:demo/src/ui/patient/patient_delete_view.dart';
 import 'package:demo/src/ui/patient/patient_edit_view.dart';
 import 'package:demo/src/ui/patient/patient_list_view.dart';
+import 'package:demo/src/ui/patient/patient_provider.dart';
 import 'package:demo/src/ui/polyclinic/polyclinic_add_view.dart';
+import 'package:demo/src/ui/polyclinic/polyclinic_provider.dart';
 import 'package:demo/src/ui/prescription/prescription_add_view.dart';
+import 'package:demo/src/ui/prescription/prescription_provider.dart';
+import 'package:demo/src/ui/treatment/treatment_provider.dart';
 import 'package:demo/src/utility/search/analysis_search_delegate.dart';
 import 'package:demo/src/utility/search/employe_search_delegate.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 import 'package:demo/src/ui/treatment/treatment_add_view.dart';
@@ -37,14 +45,38 @@ class MyApp extends StatelessWidget {
   static const String _title = 'Flutter Code Sample';
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => AnalysisProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AppointmentProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => EmployeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PatientProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PolyclinicProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PrescriptionProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => TreatmentProvider(),
+        )
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: RoutesKeys.home,
+        onGenerateRoute: AppRouter.generateRoute,
       ),
-      initialRoute: RoutesKeys.home,
-      onGenerateRoute: AppRouter.generateRoute,
-      
     );
   }
 }
