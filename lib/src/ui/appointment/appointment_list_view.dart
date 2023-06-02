@@ -22,7 +22,6 @@ class _AppointmentListViewState extends State<AppointmentListView> {
 
   @override
   Widget build(BuildContext context) {
-    
     appointments().then(
       (value) {
         setState(() {
@@ -30,44 +29,52 @@ class _AppointmentListViewState extends State<AppointmentListView> {
         });
       },
     );
-    final appointmentProvider = Provider.of<AppointmentProvider>(context);
 
     return Scaffold(
       appBar: const CustomAppBar(title: "Randevular"),
       drawer: const CustomDrawer(),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              leading: FlutterLogo(size: 72.0),
-              title: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  appointment2[index].patient!.name! +
-                      ' ' +
-                      appointment2[index].patient!.surname!,
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue),
-                ),
+      body: Consumer<AppointmentProvider>(
+          builder: (context, provider, child) => provider.isLoading
+              ? const Center(
+                  child: Text("Yükleniyor"),
+                )
+              : _bodyWidget()),
+    );
+  }
+
+  Widget _bodyWidget() {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return Card(
+          child: ListTile(
+            leading: FlutterLogo(size: 72.0),
+            title: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                appointment2[index].patient!.name! +
+                    ' ' +
+                    appointment2[index].patient!.surname!,
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue),
               ),
-              subtitle: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(appointment2[index].startDate! +
-                    ' - ' +
-                    appointment2[index].endDate!),
-              ),
-              trailing: Container(
-                child: Icon(Icons.more_vert),
-                height: double.infinity,
-              ),
-              isThreeLine: true,
             ),
-          );
-        },
-        itemCount: appointment2.length,
-      ),
+            subtitle: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(appointment2[index].startDate! +
+                  ' - ' +
+                  appointment2[index].endDate!),
+            ),
+            trailing: Container(
+              child: Icon(Icons.more_vert),
+              height: double.infinity,
+            ),
+            isThreeLine: true,
+          ),
+        );
+      },
+      itemCount: appointment2.length,
     );
   }
 }

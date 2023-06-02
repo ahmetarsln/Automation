@@ -20,57 +20,64 @@ class _AnalysisAddViewState extends State<AnalysisAddView> {
 
   @override
   Widget build(BuildContext context) {
-    patients();
-    final analysisProvider= Provider.of<AnalysisProvider>(context);
     return Scaffold(
       appBar: const CustomAppBar(title: "Yeni Tahlil"),
       drawer: const CustomDrawer(),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'başlangıç tarihi',
-              ),
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+      body: Consumer<AnalysisProvider>(
+          builder: (context, provider, child) => provider.isLoading
+              ? const Center(
+                  child: Text("Yükleniyor"),
+                )
+              : _bodyWidget()),
+    );
+  }
+
+  Widget _bodyWidget() {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'başlangıç tarihi',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Sonuç tarihi',
+            ),
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Hasta adı',
+            ),
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Parametreler',
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // Validate will return true if the form is valid, or false if
+                // the form is invalid.
+                if (_formKey.currentState!.validate()) {
+                  // Process data.
+                  print("validation complete");
                 }
-                return null;
               },
+              child: const Text('Submit'),
             ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Sonuç tarihi',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Hasta adı',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Parametreler',
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Validate will return true if the form is valid, or false if
-                  // the form is invalid.
-                  if (_formKey.currentState!.validate()) {
-                    // Process data.
-                    print("validation complete");
-                  }
-                },
-                child: const Text('Submit'),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

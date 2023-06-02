@@ -18,61 +18,67 @@ class _PatientEditViewState extends State<PatientEditView> {
 
   @override
   Widget build(BuildContext context) {
-    patients();
-    final patientProvider = Provider.of<PatientProvider>(context);
 
     return Scaffold(
       appBar: const CustomAppBar(title: "Hasta Düzenleme"),
       drawer: const CustomDrawer(),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            TextFormField(
-              initialValue: Provider.of<PatientProvider>(context)
-                  .CurrentPatient!
-                  .birthDate,
-              decoration: const InputDecoration(
-                hintText: 'Tcnizi girin',
-              ),
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+      body: Consumer<PatientProvider>(
+          builder: (context, provider, child) => provider.isLoading
+              ? const Center(
+                  child: Text("Yükleniyor"),
+                )
+              : _bodyWidget(context)),
+    );
+  }
+
+  Widget _bodyWidget(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          TextFormField(
+            initialValue:
+                Provider.of<PatientProvider>(context).CurrentPatient!.birthDate,
+            decoration: const InputDecoration(
+              hintText: 'Tcnizi girin',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Adınızı girin',
+            ),
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Soyadınız girin',
+            ),
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Soyadınız girin',
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // Validate will return true if the form is valid, or false if
+                // the form is invalid.
+                if (_formKey.currentState!.validate()) {
+                  // Process data.
+                  print("validation complete");
                 }
-                return null;
               },
+              child: const Text('Submit'),
             ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Adınızı girin',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Soyadınız girin',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Soyadınız girin',
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Validate will return true if the form is valid, or false if
-                  // the form is invalid.
-                  if (_formKey.currentState!.validate()) {
-                    // Process data.
-                    print("validation complete");
-                  }
-                },
-                child: const Text('Submit'),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

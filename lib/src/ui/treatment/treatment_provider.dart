@@ -9,7 +9,7 @@ class TreatmentProvider extends ChangeNotifier {
 
   List<Treatment> _treatmentList = [];
   Treatment? _currentTreatment;
-  bool _isLoading = true;
+  bool isLoading = true;
   List<Treatment> get treatmentList => _treatmentList;
   set treatmentList(List<Treatment> value) {
     _treatmentList = value;
@@ -19,25 +19,25 @@ class TreatmentProvider extends ChangeNotifier {
   Treatment? get CurrentTreatment => _currentTreatment;
 
   void changeTreatment(Treatment treatment) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _currentTreatment = treatment;
-    _isLoading = false;
+    isLoading = false;
     notifyListeners();
   }
 
   void fetchTreatment(String id) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _treatmentRepository.getTreatment(id).then((value) {
       _currentTreatment = Treatment.fromJson(value.data()!);
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void fetchTreatments() {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _treatmentRepository.getTreatments().then((value) {
       _treatmentList = [];
@@ -46,36 +46,36 @@ class TreatmentProvider extends ChangeNotifier {
       }
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void updateTreatment(Treatment treatment) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _treatmentRepository.updateTreatment(treatment).then((value) {
       _currentTreatment = treatment;
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void deleteTreatment(Treatment treatment) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _treatmentRepository.deleteTreatment(treatment.id!).then((value) {
       _currentTreatment = null;
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void addTreatment(Treatment treatment) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _treatmentRepository.addTreatment(treatment).then((value) {
       _currentTreatment = treatment;
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 }

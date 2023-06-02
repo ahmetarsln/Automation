@@ -20,31 +20,15 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
 
   @override
   Widget build(BuildContext context) {
-    final analysisProvider = Provider.of<AnalysisProvider>(context);
-    print(analysisProvider.CurrentAnalysis);
     return Scaffold(
       appBar: const CustomAppBar(title: "Tahlil Düzenleme"),
       drawer: const CustomDrawer(),
       body: Consumer<AnalysisProvider>(
-          builder: (context, value, child) => value.isLoading
-              ? Center(
-                  child: Column(
-                    children: [
-                      Text("Yükleniyor"),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            print("validation complete");
-                            print(value.getAnalysis());
-                          },
-                          child: const Text('Submit'),
-                        ),
-                      )
-                    ],
-                  ),
+          builder: (context, provider, child) => provider.isLoading
+              ? const Center(
+                  child: Text("Yükleniyor"),
                 )
-              : _bodyWidget(value)),
+              : _bodyWidget(provider)),
     );
   }
 

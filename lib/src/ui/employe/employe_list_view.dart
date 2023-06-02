@@ -26,25 +26,33 @@ class _EmployeListViewState extends State<EmployeListView> {
         });
       },
     );
-    final employeProvider = Provider.of<EmployeProvider>(context);
 
     return Scaffold(
       appBar: const CustomAppBar(title: "Çalışan Listesi"),
       drawer: const CustomDrawer(),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              title: Text(employe2[index].tc.toString()),
-              leading: const FlutterLogo(size: 72.0),
-              subtitle: Text(employe2[index].name!.toString()),
-              trailing: const Icon(Icons.more_vert),
-              isThreeLine: true,
-            ),
-          );
-        },
-        itemCount: employe2.length,
-      ),
+      body: Consumer<EmployeProvider>(
+          builder: (context, provider, child) => provider.isLoading
+              ? const Center(
+                  child: Text("Yükleniyor"),
+                )
+              : _bodyWidget()),
+    );
+  }
+
+  Widget _bodyWidget() {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return Card(
+          child: ListTile(
+            title: Text(employe2[index].tc.toString()),
+            leading: const FlutterLogo(size: 72.0),
+            subtitle: Text(employe2[index].name!.toString()),
+            trailing: const Icon(Icons.more_vert),
+            isThreeLine: true,
+          ),
+        );
+      },
+      itemCount: employe2.length,
     );
   }
 }

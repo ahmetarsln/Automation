@@ -27,26 +27,33 @@ class _PatientListViewState extends State<PatientListView> {
         });
       },
     );
-    final patientProvider = Provider.of<PatientProvider>(context);
 
     return Scaffold(
       appBar: const CustomAppBar(title: "Hastalar Listesi"),
       drawer: const CustomDrawer(),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              leading: FlutterLogo(size: 72.0),
-              title: Text(
-                  patient2[index].name! + ' ' + patient2[index].surname!),
-              subtitle: Text(patient2[index].tc!.toString()),
-              trailing: Icon(Icons.more_vert),
-              isThreeLine: true,
-            ),
-          );
-        },
-        itemCount: patient2.length,
-      ),
+      body: Consumer<PatientProvider>(
+          builder: (context, provider, child) => provider.isLoading
+              ? const Center(
+                  child: Text("Yükleniyor"),
+                )
+              : _bodyWidget()),
+    );
+  }
+
+  Widget _bodyWidget() {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return Card(
+          child: ListTile(
+            leading: FlutterLogo(size: 72.0),
+            title: Text(patient2[index].name! + ' ' + patient2[index].surname!),
+            subtitle: Text(patient2[index].tc!.toString()),
+            trailing: Icon(Icons.more_vert),
+            isThreeLine: true,
+          ),
+        );
+      },
+      itemCount: patient2.length,
     );
   }
 }

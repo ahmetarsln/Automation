@@ -19,76 +19,83 @@ class _EmployeDeleteViewState extends State<EmployeDeleteView> {
 
   @override
   Widget build(BuildContext context) {
-    patients();
-    final employeProvider = Provider.of<EmployeProvider>(context);
 
     return Scaffold(
       appBar: const CustomAppBar(title: "Çalışan Silme"),
       drawer: const CustomDrawer(),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: TextFormField(
-                initialValue: "taoeo",
-                enabled: false,
-                decoration: const InputDecoration(
-                  hintText: 'Başlangıç tarihi',
-                  border: OutlineInputBorder(),
-                ),
+      body: Consumer<EmployeProvider>(
+          builder: (context, provider, child) => provider.isLoading
+              ? const Center(
+                  child: Text("Yükleniyor"),
+                )
+              : _bodyWidget()),
+    );
+  }
+
+  Widget _bodyWidget() {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: TextFormField(
+              initialValue: "taoeo",
+              enabled: false,
+              decoration: const InputDecoration(
+                hintText: 'Başlangıç tarihi',
+                border: OutlineInputBorder(),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: TextFormField(
-                initialValue: "taoeo",
-                enabled: false,
-                decoration: const InputDecoration(
-                  hintText: 'Bitiş tarihi',
-                  border: OutlineInputBorder(),
-                ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: TextFormField(
+              initialValue: "taoeo",
+              enabled: false,
+              decoration: const InputDecoration(
+                hintText: 'Bitiş tarihi',
+                border: OutlineInputBorder(),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: TextFormField(
-                initialValue: "taoeo",
-                enabled: false,
-                decoration: const InputDecoration(
-                  hintText: 'Çalışan',
-                  border: OutlineInputBorder(),
-                ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: TextFormField(
+              initialValue: "taoeo",
+              enabled: false,
+              decoration: const InputDecoration(
+                hintText: 'Çalışan',
+                border: OutlineInputBorder(),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: TextFormField(
-                initialValue: "taoeo",
-                enabled: false,
-                decoration: const InputDecoration(
-                  hintText: 'Hasta',
-                  border: OutlineInputBorder(),
-                ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: TextFormField(
+              initialValue: "taoeo",
+              enabled: false,
+              decoration: const InputDecoration(
+                hintText: 'Hasta',
+                border: OutlineInputBorder(),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Validate will return true if the form is valid, or false if
-                  // the form is invalid.
-                  if (_formKey.currentState!.validate()) {
-                    // Process data.
-                    print("validation complete");
-                  }
-                },
-                child: const Text('Submit'),
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // Validate will return true if the form is valid, or false if
+                // the form is invalid.
+                if (_formKey.currentState!.validate()) {
+                  // Process data.
+                  print("validation complete");
+                }
+              },
+              child: const Text('Submit'),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

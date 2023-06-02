@@ -9,7 +9,7 @@ class PrescriptionProvider extends ChangeNotifier {
   var error;
   List<Prescription> _prescriptionList = [];
   Prescription? _currentPrescription;
-  bool _isLoading = true;
+  bool isLoading = true;
   List<Prescription> get prescriptionList => _prescriptionList;
   set prescriptionList(List<Prescription> value) {
     _prescriptionList = value;
@@ -19,25 +19,25 @@ class PrescriptionProvider extends ChangeNotifier {
   Prescription? get CurrentPrescription => _currentPrescription;
 
   void changePrescription(Prescription prescription) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _currentPrescription = prescription;
-    _isLoading = false;
+    isLoading = false;
     notifyListeners();
   }
 
   void fetchPrescription(String id) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _prescriptionRepository.getPrescription(id).then((value) {
       _currentPrescription = Prescription.fromJson(value.data()!);
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void fetchPrescriptions(){
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _prescriptionRepository.getPrescriptions().then((value) {
       _prescriptionList = [];
@@ -46,36 +46,36 @@ class PrescriptionProvider extends ChangeNotifier {
       }
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void updatePrescription(Prescription prescription) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _prescriptionRepository.updatePrescription(prescription).then((value) {
       _currentPrescription = prescription;
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
   
   void deletePrescription(Prescription prescription) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _prescriptionRepository.deletePrescription(prescription.id!).then((value) {
       _currentPrescription = prescription;
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void addPrescription(Prescription prescription) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _prescriptionRepository.addPrescription(prescription).then((value) {
       _currentPrescription = prescription;
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 }

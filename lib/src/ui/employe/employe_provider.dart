@@ -9,7 +9,7 @@ class EmployeProvider extends ChangeNotifier {
 
   List<Employe> _employeList = [];
   Employe? _currentEmploye;
-  bool _isLoading = true;
+  bool isLoading = true;
   List<Employe> get employeList => _employeList;
   set employeList(List<Employe> value) {
     _employeList = value;
@@ -19,25 +19,25 @@ class EmployeProvider extends ChangeNotifier {
   Employe? get CurrentEmploye => _currentEmploye;
 
   void changeEmploye(Employe employe) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _currentEmploye = employe;
-    _isLoading = false;
+    isLoading = false;
     notifyListeners();
   }
 
   void fetchEmploye(String id) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _employeRepository.getEmploye(id).then((value) {
       _currentEmploye = Employe.fromJson(value.data()!);
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void fetchEmployes() {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _employeRepository.getEmployes().then((value) {
       _employeList = [];
@@ -46,36 +46,36 @@ class EmployeProvider extends ChangeNotifier {
       }
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void updateEmploye(Employe employe) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _employeRepository.updateEmploye(employe).then((value) {
       _currentEmploye = employe;
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void deleteEmploye(Employe employe) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _employeRepository.deleteEmploye(employe.id!).then((value) {
       _employeList.remove(employe);
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void addEmploye(Employe employe) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _employeRepository.addEmploye(employe).then((value) {
       _employeList.add(employe);
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 }

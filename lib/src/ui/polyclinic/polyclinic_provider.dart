@@ -1,4 +1,3 @@
-
 import 'package:demo/src/data/models/polyclinic.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +8,7 @@ class PolyclinicProvider extends ChangeNotifier {
   var error;
   List<Polyclinic> _polyclinicList = [];
   Polyclinic? _currentPolyclinic;
-  bool _isLoading = true;
+  bool isLoading = true;
   List<Polyclinic> get polyclinicList => _polyclinicList;
   set polyclinicList(List<Polyclinic> value) {
     _polyclinicList = value;
@@ -19,25 +18,25 @@ class PolyclinicProvider extends ChangeNotifier {
   Polyclinic? get CurrentPolyclinic => _currentPolyclinic;
 
   void changePolyclinic(Polyclinic polyclinic) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _currentPolyclinic = polyclinic;
-    _isLoading = false;
+    isLoading = false;
     notifyListeners();
   }
 
   void fetchPolyclinic(String id) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _polyclinicRepository.getPolyclinic(id).then((value) {
       _currentPolyclinic = Polyclinic.fromJson(value.data()!);
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void fetchPolyclinics() {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _polyclinicRepository.getPolyclinics().then((value) {
       _polyclinicList = [];
@@ -46,34 +45,36 @@ class PolyclinicProvider extends ChangeNotifier {
       }
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
+
   void updatePolyclinic(Polyclinic polyclinic) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _polyclinicRepository.updatePolyclinic(polyclinic).then((value) {
       _currentPolyclinic = polyclinic;
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
+
   void deletePolyclinic(Polyclinic polyclinic) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _polyclinicRepository.deletePolyclinic(polyclinic.id!).then((value) {
       _currentPolyclinic = polyclinic;
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void addPolyclinic(Polyclinic polyclinic) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _polyclinicRepository.addPolyclinic(polyclinic).then((value) {
       _currentPolyclinic = polyclinic;
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 }

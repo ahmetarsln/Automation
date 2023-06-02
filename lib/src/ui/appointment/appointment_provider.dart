@@ -9,7 +9,7 @@ class AppointmentProvider extends ChangeNotifier {
 
   List<Appointment> _appointmentList = [];
   Appointment? _currentAppointment;
-  bool _isLoading = true;
+  bool isLoading = true;
   List<Appointment> get appointmentList => _appointmentList;
   set appointmentList(List<Appointment> value) {
     _appointmentList = value;
@@ -19,27 +19,27 @@ class AppointmentProvider extends ChangeNotifier {
   Appointment? get CurrentAppointment => _currentAppointment;
 
   void changeAppointment(Appointment appointment) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _currentAppointment = appointment;
-    _isLoading = false;
+    isLoading = false;
     notifyListeners();
   }
 
   void fetchAppointment(String id) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _appointmentRepository.getAppointment(id).then((value) {
       _currentAppointment = Appointment.fromJson(value.data()!);
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
-    _isLoading = false;
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
+    isLoading = false;
     notifyListeners();
   }
 
   void fetchAppointments() {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _appointmentRepository.getAppointments().then((value) {
       _appointmentList = [];
@@ -48,37 +48,37 @@ class AppointmentProvider extends ChangeNotifier {
       }
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
     
   }
 
   void updateAppointment(Appointment appointment) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _appointmentRepository.updateAppointment(appointment).then((value) {
       _currentAppointment = appointment;
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void deleteAppointment(Appointment appointment) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _appointmentRepository.deleteAppointment(appointment.id!).then((value) {
       _appointmentList.remove(appointment);
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void addAppointment(Appointment appointment) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _appointmentRepository.addAppointment(appointment).then((value) {
       _appointmentList.add(appointment);
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 }

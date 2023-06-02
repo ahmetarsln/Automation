@@ -27,25 +27,33 @@ class _PolyclinicListViewState extends State<PolyclinicListView> {
         });
       },
     );
-    final polyclinicProvider = Provider.of<PolyclinicProvider>(context);
 
     return Scaffold(
       appBar: const CustomAppBar(title: "Poliklinikler"),
       drawer: const CustomDrawer(),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              leading: FlutterLogo(size: 72.0),
-              title: Text(polyclinic2[index].name!),
-              subtitle: Text(polyclinic2[index].id!.toString()),
-              trailing: Icon(Icons.more_vert),
-              isThreeLine: true,
-            ),
-          );
-        },
-        itemCount: polyclinic2.length,
-      ),
+      body: Consumer<PolyclinicProvider>(
+          builder: (context, provider, child) => provider.isLoading
+              ? const Center(
+                  child: Text("Yükleniyor"),
+                )
+              : _bodyWidget()),
+    );
+  }
+
+  Widget _bodyWidget() {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return Card(
+          child: ListTile(
+            leading: FlutterLogo(size: 72.0),
+            title: Text(polyclinic2[index].name!),
+            subtitle: Text(polyclinic2[index].id!.toString()),
+            trailing: Icon(Icons.more_vert),
+            isThreeLine: true,
+          ),
+        );
+      },
+      itemCount: polyclinic2.length,
     );
   }
 }

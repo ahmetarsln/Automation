@@ -19,58 +19,65 @@ class _PrescriptionAddViewState extends State<PrescriptionAddView> {
 
   @override
   Widget build(BuildContext context) {
-    patients();
-    final prescriptionProvider = Provider.of<PrescriptionProvider>(context);
 
     return Scaffold(
       appBar: const CustomAppBar(title: "Yeni Reçete"),
       drawer: const CustomDrawer(),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'İlaç seçiniz',
-              ),
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+      body: Consumer<PrescriptionProvider>(
+          builder: (context, provider, child) => provider.isLoading
+              ? const Center(
+                  child: Text("Yükleniyor"),
+                )
+              : _bodyWidget()),
+    );
+  }
+
+  Widget _bodyWidget() {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'İlaç seçiniz',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Reçete tarihi',
+            ),
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Çalışan adı',
+            ),
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Hasta adı',
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // Validate will return true if the form is valid, or false if
+                // the form is invalid.
+                if (_formKey.currentState!.validate()) {
+                  // Process data.
+                  print("validation complete");
                 }
-                return null;
               },
+              child: const Text('Submit'),
             ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Reçete tarihi',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Çalışan adı',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Hasta adı',
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Validate will return true if the form is valid, or false if
-                  // the form is invalid.
-                  if (_formKey.currentState!.validate()) {
-                    // Process data.
-                    print("validation complete");
-                  }
-                },
-                child: const Text('Submit'),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

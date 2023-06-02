@@ -20,87 +20,95 @@ class _TreatmentEditViewState extends State<TreatmentEditView> {
 
   @override
   Widget build(BuildContext context) {
-    final treatmentProvider = Provider.of<TreatmentProvider>(context);
 
     return Scaffold(
       appBar: const CustomAppBar(title: "Reçete Düzenleme"),
       drawer: const CustomDrawer(),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            TextFormField(
-              initialValue: Provider.of<TreatmentProvider>(context)
-                  .CurrentTreatment!
-                  .startDate,
-              decoration: const InputDecoration(
-                hintText: 'Başlangıç tarihi',
-              ),
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+      body: Consumer<TreatmentProvider>(
+          builder: (context, provider, child) => provider.isLoading
+              ? const Center(
+                  child: Text("Yükleniyor"),
+                )
+              : _bodyWidget(context)),
+    );
+  }
+
+  Widget _bodyWidget(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          TextFormField(
+            initialValue: Provider.of<TreatmentProvider>(context)
+                .CurrentTreatment!
+                .startDate,
+            decoration: const InputDecoration(
+              hintText: 'Başlangıç tarihi',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            initialValue: Provider.of<TreatmentProvider>(context)
+                .CurrentTreatment!
+                .endDate,
+            decoration: const InputDecoration(
+              hintText: 'Bitiş tarihi',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            initialValue: Provider.of<TreatmentProvider>(context)
+                .CurrentTreatment!
+                .startDate,
+            decoration: const InputDecoration(
+              hintText: 'Randevular',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            initialValue: Provider.of<TreatmentProvider>(context)
+                .CurrentTreatment!
+                .endDate,
+            decoration: const InputDecoration(
+              hintText: 'Notlar',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // Validate will return true if the form is valid, or false if
+                // the form is invalid.
+                if (_formKey.currentState!.validate()) {
+                  // Process data.
+                  print("validation complete");
                 }
-                return null;
               },
+              child: const Text('Submit'),
             ),
-            TextFormField(
-              initialValue: Provider.of<TreatmentProvider>(context)
-                  .CurrentTreatment!
-                  .endDate,
-              decoration: const InputDecoration(
-                hintText: 'Bitiş tarihi',
-              ),
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              initialValue: Provider.of<TreatmentProvider>(context)
-                  .CurrentTreatment!
-                  .startDate,
-              decoration: const InputDecoration(
-                hintText: 'Randevular',
-              ),
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              initialValue: Provider.of<TreatmentProvider>(context)
-                  .CurrentTreatment!
-                  .endDate,
-              decoration: const InputDecoration(
-                hintText: 'Notlar',
-              ),
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Validate will return true if the form is valid, or false if
-                  // the form is invalid.
-                  if (_formKey.currentState!.validate()) {
-                    // Process data.
-                    print("validation complete");
-                  }
-                },
-                child: const Text('Submit'),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

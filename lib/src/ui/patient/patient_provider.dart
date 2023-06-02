@@ -8,7 +8,7 @@ class PatientProvider extends ChangeNotifier {
   var error;
   List<Patient> _patientList = [];
   Patient? _currentPatient;
-  bool _isLoading = true;
+  bool isLoading = true;
   List<Patient> get patientList => _patientList;
   set patientList(List<Patient> value) {
     _patientList = value;
@@ -18,25 +18,25 @@ class PatientProvider extends ChangeNotifier {
   Patient? get CurrentPatient => _currentPatient;
 
   void changePatient(Patient patient) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _currentPatient = patient;
-    _isLoading = false;
+    isLoading = false;
     notifyListeners();
   }
 
   void fetchPatient(String id) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _patientRepository.getPatient(id).then((value) {
       _currentPatient = Patient.fromJson(value.data()!);
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void fetchPatients() {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _patientRepository.getPatients().then((value) {
       _patientList = [];
@@ -45,36 +45,36 @@ class PatientProvider extends ChangeNotifier {
       }
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void updatePatient(Patient patient) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _patientRepository.updatePatient(patient).then((value) {
       _currentPatient = patient;
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void deletePatient(Patient patient) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _patientRepository.deletePatient(patient.id!).then((value) {
       _currentPatient = patient;
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
   void addPatient(Patient patient) {
-    _isLoading = true;
+    isLoading = true;
     notifyListeners();
     _patientRepository.addPatient(patient).then((value) {
       _currentPatient = patient;
     }).catchError((e) {
       error = e;
-    }).whenComplete(() => {_isLoading = false, notifyListeners()});
+    }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 }

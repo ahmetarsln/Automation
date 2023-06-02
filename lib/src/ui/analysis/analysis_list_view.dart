@@ -29,67 +29,73 @@ class _AnalysisListViewState extends State<AnalysisListView> {
         });
       },
     );
-    final analysisProvider = Provider.of<AnalysisProvider>(context);
 
-    return Consumer<AnalysisProvider>(
-      builder: (context, value, child) => Scaffold(
-        appBar: const CustomAppBar(title: "Tahliller"),
-        drawer: const CustomDrawer(),
-        body: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: ElevatedButton(
-                  child: Text(
-                    "Yeni Tahlil",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () =>
-                      {Navigator.of(context).pushNamed(RoutesKeys.analysisNew)},
-                ),
+    return Scaffold(
+      appBar: const CustomAppBar(title: "Tahliller"),
+      drawer: const CustomDrawer(),
+      body: Consumer<AnalysisProvider>(
+          builder: (context, provider, child) => provider.isLoading
+              ? const Center(
+                  child: Text("Yükleniyor"),
+                )
+              : _bodyWidget(context, provider)),
+    );
+  }
+
+  Widget _bodyWidget(BuildContext context, AnalysisProvider value) {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: ElevatedButton(
+              child: Text(
+                "Yeni Tahlil",
+                style: TextStyle(fontSize: 20),
               ),
+              onPressed: () =>
+                  {Navigator.of(context).pushNamed(RoutesKeys.analysisNew)},
             ),
-            Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: ListTile(
-                      leading: Icon(Icons.supervised_user_circle, size: 48),
-                      title: Text(analysis2[index].patient!.name! +
-                          ' ' +
-                          analysis2[index].patient!.surname!),
-                      subtitle: Text(analysis2[index].patient!.tc!.toString()),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.edit),
-                            onPressed: () {
-                              value.changeAnalysis(analysis2[index]);
-                              Navigator.of(context)
-                                  .pushNamed(RoutesKeys.analysisEdit);
-                            },
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.delete),
-                            onPressed: () => {
-                              Navigator.of(context)
-                                  .pushNamed(RoutesKeys.analysisDelete)
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-                itemCount: analysis2.length,
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
+        Expanded(
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  leading: Icon(Icons.supervised_user_circle, size: 48),
+                  title: Text(analysis2[index].patient!.name! +
+                      ' ' +
+                      analysis2[index].patient!.surname!),
+                  subtitle: Text(analysis2[index].patient!.tc!.toString()),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          value.changeAnalysis(analysis2[index]);
+                          Navigator.of(context)
+                              .pushNamed(RoutesKeys.analysisEdit);
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () => {
+                          Navigator.of(context)
+                              .pushNamed(RoutesKeys.analysisDelete)
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+            itemCount: analysis2.length,
+          ),
+        ),
+      ],
     );
   }
 }
