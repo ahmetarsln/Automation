@@ -41,6 +41,10 @@ enum DialogType {
 
 class RoutesKeys {
   static const String home ="/";
+
+  static const String login = "/login";
+  static const String register = "/register";
+  
   
   static const String analysisList = "/analysis";
   static const String analysisNew = "/analysis/new";

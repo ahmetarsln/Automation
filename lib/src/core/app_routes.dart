@@ -9,6 +9,8 @@ import 'package:demo/src/ui/appointment/appointment_delete_view.dart';
 import 'package:demo/src/ui/appointment/appointment_edit_view.dart';
 import 'package:demo/src/ui/appointment/appointment_list_view.dart';
 import 'package:demo/src/ui/appointment/appointment_provider.dart';
+import 'package:demo/src/ui/auth/login_view.dart';
+import 'package:demo/src/ui/auth/register_view.dart';
 import 'package:demo/src/ui/employe/employe_add_view.dart';
 import 'package:demo/src/ui/employe/employe_delete_view.dart';
 import 'package:demo/src/ui/employe/employe_edit_view.dart';
@@ -46,6 +48,11 @@ class AppRouter {
     switch (settings.name) {
       case RoutesKeys.home:
         return MaterialPageRoute(builder: (_) => const HomeView());
+
+      case RoutesKeys.login:
+        return MaterialPageRoute(builder: (_) => const LoginView());
+      case RoutesKeys.register:
+        return MaterialPageRoute(builder: (_) => const RegisterView());
 
       case RoutesKeys.analysisNew:
         return MaterialPageRoute(builder: (_) => const AnalysisAddView());

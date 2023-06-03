@@ -1,5 +1,7 @@
 import 'package:demo/src/core/app_constant.dart';
+import 'package:demo/src/ui/analysis/analysis_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
@@ -22,6 +24,8 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             title: const Text('Tahlliler'),
             onTap: () {
+              Provider.of<AnalysisProvider>(context, listen: false)
+                  .fetchAnalyses();
               Navigator.of(context).pushNamed(RoutesKeys.analysisList);
             },
           ),

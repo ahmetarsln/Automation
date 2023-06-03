@@ -38,31 +38,54 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
       child: Column(
         children: [
           TextFormField(
-            initialValue: value.CurrentAnalysis!.patient!.name!,
+            initialValue: value.CurrentAnalysis!.parameters,
             decoration: const InputDecoration(
-              hintText: 'Tcnizi girin',
+              hintText: 'Parametreleri Giriniz',
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Bu kısım boş olamaz';
               }
               return null;
             },
           ),
           TextFormField(
+            initialValue: value.CurrentAnalysis!.patient!.name! +
+                " " +
+                value.CurrentAnalysis!.patient!.surname!,
             decoration: const InputDecoration(
-              hintText: 'Adınızı girin',
+              hintText: 'Hastayı giriniz',
             ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Bu kısım boş olamaz';
+              }
+              return null;
+            },
           ),
           TextFormField(
+            initialValue: value.CurrentAnalysis!.notificationDate!,
             decoration: const InputDecoration(
-              hintText: 'Soyadınız girin',
+              hintText: 'Başlangıç tarihi giriniz',
             ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Bu kısım boş olamaz';
+              }
+              return null;
+            },
           ),
           TextFormField(
+            initialValue: value.CurrentAnalysis!.finishdate!,
             decoration: const InputDecoration(
-              hintText: 'Soyadınız girin',
+              hintText: 'Sonuç tarihi giriniz',
             ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Bu kısım boş olamaz';
+              }
+              return null;
+            },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -72,10 +95,9 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
                 // the form is invalid.
                 if (_formKey.currentState!.validate()) {
                   // Process data.
-                  print("validation complete");
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Kaydet'),
             ),
           ),
         ],

@@ -4,9 +4,8 @@ import 'package:demo/src/data/models/appointment.dart';
 
 class AnalysisRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  
-  
-  Future getAnalysis(String id ) {
+
+  Future getAnalysis(String id) {
     return _firestore.collection('analysis').doc(id).get();
   }
 
@@ -25,7 +24,7 @@ class AnalysisRepository {
     return _firestore.collection('analysis').doc(id).delete();
   }
 
-  Future addAnalysis(Analysis analysis ) {
+  Future addAnalysis(Analysis analysis) {
     return _firestore.collection('analysis').add(analysis.toJson());
   }
 }

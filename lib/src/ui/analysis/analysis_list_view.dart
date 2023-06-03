@@ -16,8 +16,6 @@ class AnalysisListView extends StatefulWidget {
 }
 
 class _AnalysisListViewState extends State<AnalysisListView> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   late var analysis2 = <Analysis>[];
 
   @override
@@ -33,12 +31,13 @@ class _AnalysisListViewState extends State<AnalysisListView> {
     return Scaffold(
       appBar: const CustomAppBar(title: "Tahliller"),
       drawer: const CustomDrawer(),
-      body: Consumer<AnalysisProvider>(
-          builder: (context, provider, child) => provider.isLoading
-              ? const Center(
-                  child: Text("Yükleniyor"),
-                )
-              : _bodyWidget(context, provider)),
+      body: Consumer<AnalysisProvider>(builder: (context, provider, child) {
+        return provider.isLoading
+            ? const Center(
+                child: Text("Yükleniyor"),
+              )
+            : _bodyWidget(context, provider);
+      }),
     );
   }
 

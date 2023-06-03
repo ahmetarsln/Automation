@@ -1,3 +1,4 @@
+import 'package:demo/src/data/models/analysis.dart';
 import 'package:demo/src/data/models/patient.dart';
 import 'package:demo/src/ui/analysis/analysis_provider.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class AnalysisAddView extends StatefulWidget {
 
 class _AnalysisAddViewState extends State<AnalysisAddView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Analysis analysis = Analysis(parameters: null, patient: null);
 
   @override
   Widget build(BuildContext context) {
@@ -28,40 +30,67 @@ class _AnalysisAddViewState extends State<AnalysisAddView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget()),
+              : _bodyWidget(provider)),
     );
   }
 
-  Widget _bodyWidget() {
+  Widget _bodyWidget(AnalysisProvider provider) {
     return Form(
       key: _formKey,
       child: Column(
         children: [
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'başlangıç tarihi',
+              hintText: 'başlangıç tarih',
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Bu kısım boş olamaz';
               }
               return null;
             },
+            onChanged: (newValue) => analysis.notificationDate = newValue,
           ),
           TextFormField(
             decoration: const InputDecoration(
               hintText: 'Sonuç tarihi',
             ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Bu kısım boş olamaz';
+              }
+              return null;
+            },
+            onChanged: (newValue) => analysis.finishdate = newValue,
           ),
           TextFormField(
             decoration: const InputDecoration(
               hintText: 'Hasta adı',
             ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Bu kısım boş olamaz';
+              }
+              return null;
+            },
+            onChanged: (newValue) => analysis.patient = new Patient(
+                name: newValue,
+                surname: newValue,
+                birthDate: null,
+                gender: null,
+                tc: null),
           ),
           TextFormField(
             decoration: const InputDecoration(
               hintText: 'Parametreler',
             ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Bu kısım boş olamaz';
+              }
+              return null;
+            },
+            onChanged: (newValue) => analysis.parameters = newValue,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -71,10 +100,11 @@ class _AnalysisAddViewState extends State<AnalysisAddView> {
                 // the form is invalid.
                 if (_formKey.currentState!.validate()) {
                   // Process data.
+                  provider.addAnalysis(analysis);
                   print("validation complete");
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Ekle'),
             ),
           ),
         ],

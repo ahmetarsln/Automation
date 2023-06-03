@@ -9,6 +9,7 @@ import 'package:demo/src/ui/appointment/appointment_add_view.dart';
 import 'package:demo/src/ui/appointment/appointment_delete_view.dart';
 import 'package:demo/src/ui/appointment/appointment_list_view.dart';
 import 'package:demo/src/ui/appointment/appointment_provider.dart';
+import 'package:demo/src/ui/auth/auth_provider.dart';
 import 'package:demo/src/ui/employe/employe_add_view.dart';
 import 'package:demo/src/ui/employe/employe_list_view.dart';
 import 'package:demo/src/ui/employe/employe_provider.dart';
@@ -48,6 +49,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
+          create: (context) => AuthProvider(),
+        ),
+        ChangeNotifierProvider(
           create: (context) => AnalysisProvider(),
         ),
         ChangeNotifierProvider(
@@ -67,14 +71,15 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => TreatmentProvider(),
-        )
+        ),
+        
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: RoutesKeys.home,
+        initialRoute: RoutesKeys.login,
         onGenerateRoute: AppRouter.generateRoute,
       ),
     );

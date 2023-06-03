@@ -22,13 +22,10 @@ class AnalysisProvider extends ChangeNotifier {
   }
 
   void changeAnalysis(Analysis analysis) {
-    print(analysis);
     isLoading = true;
-    print(isLoading);
     notifyListeners();
     _currentAnalysis = analysis;
     isLoading = false;
-    print(isLoading);
     notifyListeners();
   }
 
@@ -77,11 +74,13 @@ class AnalysisProvider extends ChangeNotifier {
 
   void addAnalysis(Analysis analysis) {
     isLoading = true;
+    print(analysis.finishdate);
     notifyListeners();
     _analysisRepository.addAnalysis(analysis).then((value) {
       _analysisList.add(analysis);
     }).catchError((e) {
       error = e;
+      print(error);
     }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 }
