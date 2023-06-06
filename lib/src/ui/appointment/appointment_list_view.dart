@@ -1,3 +1,4 @@
+import 'package:demo/src/core/app_constant.dart';
 import 'package:demo/src/data/models/appointment.dart';
 import 'package:demo/src/data/models/patient.dart';
 import 'package:demo/src/ui/appointment/appointment_provider.dart';
@@ -38,43 +39,80 @@ class _AppointmentListViewState extends State<AppointmentListView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget()),
+              : _bodyWidget(provider)),
     );
   }
 
-  Widget _bodyWidget() {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return Card(
-          child: ListTile(
-            leading: FlutterLogo(size: 72.0),
-            title: Padding(
-              padding: const EdgeInsets.all(8.0),
+  Widget _bodyWidget(AppointmentProvider provider) {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: ElevatedButton(
               child: Text(
-                appointment2[index].patient!.name! +
-                    ' ' +
-                    appointment2[index].patient!.surname!,
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue),
+                "Yeni Tahlil",
+                style: TextStyle(fontSize: 20),
               ),
+              onPressed: () =>
+                  {Navigator.of(context).pushNamed(RoutesKeys.appointmentNew)},
             ),
-            subtitle: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(appointment2[index].startDate! +
-                  ' - ' +
-                  appointment2[index].endDate!),
-            ),
-            trailing: Container(
-              child: Icon(Icons.more_vert),
-              height: double.infinity,
-            ),
-            isThreeLine: true,
           ),
-        );
-      },
-      itemCount: appointment2.length,
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  leading: Icon(Icons.supervised_user_circle, size: 48),
+                  title: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      appointment2[index].patient!.name! +
+                          ' ' +
+                          appointment2[index].patient!.surname!,
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue),
+                    ),
+                  ),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(appointment2[index].startDate! +
+                        ' - ' +
+                        appointment2[index].endDate!),
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          provider.changeAppointment(appointment2[index]);
+                          Navigator.of(context)
+                              .pushNamed(RoutesKeys.appointmentEdit);
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          provider.changeAppointment(appointment2[index]);
+                          Navigator.of(context)
+                              .pushNamed(RoutesKeys.appointmentEdit);
+                        },
+                      ),
+                    ],
+                  ),
+                  isThreeLine: true,
+                ),
+              );
+            },
+            itemCount: appointment2.length,
+          ),
+        ),
+      ],
     );
   }
 }

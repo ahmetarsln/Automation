@@ -1,5 +1,7 @@
 import 'package:demo/src/core/custom_app_bar.dart';
 import 'package:demo/src/core/custom_drawer.dart';
+import 'package:demo/src/data/models/employe.dart';
+import 'package:demo/src/data/models/polyclinic.dart';
 import 'package:demo/src/ui/polyclinic/polyclinic_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -16,6 +18,8 @@ class PolyclinicAddView extends StatefulWidget {
 class _PolyclinicAddViewState extends State<PolyclinicAddView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  Polyclinic polyclinic = Polyclinic(id: null, name: null, employeList: null);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,22 +30,43 @@ class _PolyclinicAddViewState extends State<PolyclinicAddView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget()),
+              : _bodyWidget(provider)),
     );
   }
 
-  Widget _bodyWidget() {
+  Widget _bodyWidget(PolyclinicProvider provider) {
     return Form(
       key: _formKey,
       child: Column(
         children: [
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'Çalışan seçiniz',
+              hintText: 'Poliklinik Adını Giriniz',
             ),
+            onChanged: (value) => polyclinic.name = value,
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Bu Kısım Boş Bırakılamaz';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'Çalışan seçiniz',
+            ),
+            onChanged: (value) => polyclinic.employeList = [
+              Employe(
+                  name: value,
+                  surname: value,
+                  tc: null,
+                  birthDate: null,
+                  gender: true,
+                  department: null)
+            ],
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Bu Kısım Boş Bırakılamaz';
               }
               return null;
             },
@@ -50,14 +75,11 @@ class _PolyclinicAddViewState extends State<PolyclinicAddView> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
-                  print("validation complete");
+                  provider.addPolyclinic(polyclinic);
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Ekle'),
             ),
           ),
         ],

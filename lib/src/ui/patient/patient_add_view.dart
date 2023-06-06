@@ -16,10 +16,11 @@ class PatientAddView extends StatefulWidget {
 
 class _PatientAddViewState extends State<PatientAddView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Patient patient = Patient(
+      tc: null, name: null, surname: null, birthDate: null, gender: null);
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: const CustomAppBar(title: "Yeni Hasta"),
       drawer: const CustomDrawer(),
@@ -28,22 +29,23 @@ class _PatientAddViewState extends State<PatientAddView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget()),
+              : _bodyWidget(provider)),
     );
   }
 
-  Widget _bodyWidget() {
+  Widget _bodyWidget(PatientProvider provider) {
     return Form(
       key: _formKey,
       child: Column(
         children: [
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'Tcnizi girin',
+              hintText: 'Tcnizi giriniz',
             ),
+            onChanged: (value) => patient.tc = int.tryParse(value),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Bu alan boş girilemez';
               }
               return null;
             },
@@ -52,34 +54,35 @@ class _PatientAddViewState extends State<PatientAddView> {
             decoration: const InputDecoration(
               hintText: 'Adınızı girin',
             ),
+            onChanged: (value) => patient.name = value,
           ),
           TextFormField(
             decoration: const InputDecoration(
               hintText: 'Soyadınız girin',
             ),
+            onChanged: (value) => patient.surname = value,
           ),
           TextFormField(
             decoration: const InputDecoration(
               hintText: 'Cinsiyetinizi girin',
             ),
+            onChanged: (value) => patient.gender = value == 'e',
           ),
           TextFormField(
             decoration: const InputDecoration(
               hintText: 'Doğum tarihinizi girin',
             ),
+            onChanged: (value) => patient.birthDate = value,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
-                  print("validation complete");
+                  provider.addPatient(patient);
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Ekle'),
             ),
           ),
         ],

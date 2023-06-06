@@ -73,6 +73,8 @@ class PrescriptionProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     _prescriptionRepository.addPrescription(prescription).then((value) {
+      prescription.id =value.id!;
+      _prescriptionRepository.updatePrescription(prescription);
       _currentPrescription = prescription;
     }).catchError((e) {
       error = e;

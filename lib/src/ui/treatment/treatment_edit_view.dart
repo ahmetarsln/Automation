@@ -20,7 +20,6 @@ class _TreatmentEditViewState extends State<TreatmentEditView> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: const CustomAppBar(title: "Reçete Düzenleme"),
       drawer: const CustomDrawer(),
@@ -29,83 +28,84 @@ class _TreatmentEditViewState extends State<TreatmentEditView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget(context)),
+              : _bodyWidget(context, provider)),
     );
   }
 
-  Widget _bodyWidget(BuildContext context) {
+  Widget _bodyWidget(BuildContext context, TreatmentProvider provider) {
     return Form(
       key: _formKey,
       child: Column(
         children: [
           TextFormField(
-            initialValue: Provider.of<TreatmentProvider>(context)
-                .CurrentTreatment!
-                .startDate,
+            initialValue: provider.CurrentTreatment!.startDate,
             decoration: const InputDecoration(
               hintText: 'Başlangıç tarihi',
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Bu Kısım Boş Olamaz';
               }
               return null;
             },
+            onChanged: (value) => provider.CurrentTreatment!.startDate = value,
           ),
           TextFormField(
-            initialValue: Provider.of<TreatmentProvider>(context)
-                .CurrentTreatment!
-                .endDate,
+            initialValue: provider.CurrentTreatment!.endDate,
             decoration: const InputDecoration(
               hintText: 'Bitiş tarihi',
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Bu Kısım Boş Olamaz';
               }
               return null;
             },
+            onChanged: (value) => provider.CurrentTreatment!.endDate = value,
           ),
           TextFormField(
-            initialValue: Provider.of<TreatmentProvider>(context)
-                .CurrentTreatment!
-                .startDate,
+            initialValue: provider.CurrentTreatment!.appointments![0].startDate,
             decoration: const InputDecoration(
               hintText: 'Randevular',
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Bu Kısım Boş Olamaz';
               }
               return null;
             },
+            onChanged: (value) =>
+                provider.CurrentTreatment!.appointments ==
+                [
+                  Appointment(
+                      startDate: value,
+                      endDate: value,
+                      employe: null,
+                      patient: null)
+                ],
           ),
           TextFormField(
-            initialValue: Provider.of<TreatmentProvider>(context)
-                .CurrentTreatment!
-                .endDate,
+            initialValue: provider.CurrentTreatment!.notes![0],
             decoration: const InputDecoration(
               hintText: 'Notlar',
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Bu Kısım Boş Olamaz';
               }
               return null;
             },
+            onChanged: (value) => provider.CurrentTreatment!.notes = [value],
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
-                  print("validation complete");
+                  provider.updateTreatment(provider.CurrentTreatment!);
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Düzenle'),
             ),
           ),
         ],

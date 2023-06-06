@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo/src/data/models/analysis.dart';
 import 'package:demo/src/data/repository/analysis_repository.dart';
 import 'package:flutter/material.dart';
@@ -74,9 +75,11 @@ class AnalysisProvider extends ChangeNotifier {
 
   void addAnalysis(Analysis analysis) {
     isLoading = true;
-    print(analysis.finishdate);
     notifyListeners();
     _analysisRepository.addAnalysis(analysis).then((value) {
+      print(value.id!);
+      analysis.id = value.id!;
+      _analysisRepository.updateAnalysis(analysis);
       _analysisList.add(analysis);
     }).catchError((e) {
       error = e;

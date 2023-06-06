@@ -73,6 +73,8 @@ class TreatmentProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     _treatmentRepository.addTreatment(treatment).then((value) {
+      treatment.id = value.id!;
+      _treatmentRepository.updateTreatment(treatment);
       _currentTreatment = treatment;
     }).catchError((e) {
       error = e;

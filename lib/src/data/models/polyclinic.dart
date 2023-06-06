@@ -6,14 +6,14 @@ class Polyclinic {
   String? id;
   String? name;
   List<Employe>? employeList;
-  
 
   Polyclinic({required this.id, required this.name, required this.employeList});
 
   Polyclinic.fromJson(Map<String, dynamic> json) {
-    employeList = json['employeList'];
+    employeList = List.generate(json["employeList"]?.length,
+        (index) => Employe.fromJson(json["employeList"][index]));
     name = json['name'];
-    id=json['id'];
+    id = json['id'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

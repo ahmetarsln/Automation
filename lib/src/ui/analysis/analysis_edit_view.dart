@@ -32,13 +32,13 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
     );
   }
 
-  Widget _bodyWidget(AnalysisProvider value) {
+  Widget _bodyWidget(AnalysisProvider provider) {
     return Form(
       key: _formKey,
       child: Column(
         children: [
           TextFormField(
-            initialValue: value.CurrentAnalysis!.parameters,
+            initialValue: provider.CurrentAnalysis!.parameters,
             decoration: const InputDecoration(
               hintText: 'Parametreleri Giriniz',
             ),
@@ -50,9 +50,9 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
             },
           ),
           TextFormField(
-            initialValue: value.CurrentAnalysis!.patient!.name! +
+            initialValue: provider.CurrentAnalysis!.patient!.name! +
                 " " +
-                value.CurrentAnalysis!.patient!.surname!,
+                provider.CurrentAnalysis!.patient!.surname!,
             decoration: const InputDecoration(
               hintText: 'Hastayı giriniz',
             ),
@@ -64,7 +64,7 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
             },
           ),
           TextFormField(
-            initialValue: value.CurrentAnalysis!.notificationDate!,
+            initialValue: provider.CurrentAnalysis!.notificationDate!,
             decoration: const InputDecoration(
               hintText: 'Başlangıç tarihi giriniz',
             ),
@@ -76,7 +76,7 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
             },
           ),
           TextFormField(
-            initialValue: value.CurrentAnalysis!.finishdate!,
+            initialValue: provider.CurrentAnalysis!.finishdate,
             decoration: const InputDecoration(
               hintText: 'Sonuç tarihi giriniz',
             ),
@@ -91,10 +91,8 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
+                  provider.updateAnalysis(provider.CurrentAnalysis!);
                 }
               },
               child: const Text('Kaydet'),

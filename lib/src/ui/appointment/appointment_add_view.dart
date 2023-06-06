@@ -1,6 +1,7 @@
 import 'package:demo/src/core/custom_app_bar.dart';
 import 'package:demo/src/core/custom_drawer.dart';
 import 'package:demo/src/data/models/appointment.dart';
+import 'package:demo/src/data/models/employe.dart';
 import 'package:demo/src/data/models/patient.dart';
 import 'package:demo/src/ui/analysis/analysis_provider.dart';
 import 'package:demo/src/ui/appointment/appointment_provider.dart';
@@ -18,6 +19,8 @@ class AppointmentAddView extends StatefulWidget {
 
 class _AppointmentAddViewState extends State<AppointmentAddView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Appointment appointment =
+      Appointment(startDate: null, endDate: null, employe: null, patient: null);
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +32,11 @@ class _AppointmentAddViewState extends State<AppointmentAddView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget()),
+              : _bodyWidget(provider)),
     );
   }
 
-  Widget _bodyWidget() {
+  Widget _bodyWidget(AppointmentProvider provider) {
     return Form(
       key: _formKey,
       child: Column(
@@ -42,9 +45,10 @@ class _AppointmentAddViewState extends State<AppointmentAddView> {
             decoration: const InputDecoration(
               hintText: 'başlangıç tarihi',
             ),
+            onChanged: (value) => appointment.startDate = value,
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Burası boş girilemez';
               }
               return null;
             },
@@ -53,29 +57,58 @@ class _AppointmentAddViewState extends State<AppointmentAddView> {
             decoration: const InputDecoration(
               hintText: 'Bitiş tarihi',
             ),
+            onChanged: (value) => appointment.endDate = value,
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Burası boş girilemez';
+              }
+              return null;
+            },
           ),
           TextFormField(
             decoration: const InputDecoration(
               hintText: 'Çalışan adı',
             ),
+            onChanged: (value) => appointment.employe = Employe(
+                name: value,
+                surname: value,
+                tc: null,
+                birthDate: null,
+                gender: null,
+                department: null),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Burası boş girilemez';
+              }
+              return null;
+            },
           ),
           TextFormField(
             decoration: const InputDecoration(
               hintText: 'Hasta adı',
             ),
+            onChanged: (value) => appointment.patient = Patient(
+                tc: null,
+                name: value,
+                surname: value,
+                birthDate: null,
+                gender: null),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Burası boş girilemez';
+              }
+              return null;
+            },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
-                  print("validation complete");
+                  provider.addAppointment(appointment);
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Ekle'),
             ),
           ),
         ],

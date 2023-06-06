@@ -72,6 +72,8 @@ class PolyclinicProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     _polyclinicRepository.addPolyclinic(polyclinic).then((value) {
+      polyclinic.id =value.id!;
+      _polyclinicRepository.updatePolyclinic(polyclinic);
       _currentPolyclinic = polyclinic;
     }).catchError((e) {
       error = e;

@@ -21,7 +21,7 @@ class Analysis {
     id = json["id"];
     parameters = json["parameters"];
     patient = Patient.fromJson(json["patient"]);
-    finishdate = json["finishdate"];
+    finishdate = json["finishDate"];
     notificationDate = json["notificationDate"];
   }
   Map<String, dynamic> toJson() {
@@ -29,7 +29,7 @@ class Analysis {
     data['id'] = this.id;
     data['parameters'] = this.parameters;
     data['patient'] = this.patient?.toJson();
-    data['finishdate'] = this.finishdate;
+    data['finishDate'] = this.finishdate;
     data['notificationDate'] = this.notificationDate;
 
     return data;

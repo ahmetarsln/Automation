@@ -19,7 +19,6 @@ class _PatientDeleteViewState extends State<PatientDeleteView> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: const CustomAppBar(title: "Hasta Silme"),
       drawer: const CustomDrawer(),
@@ -28,11 +27,11 @@ class _PatientDeleteViewState extends State<PatientDeleteView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget()),
+              : _bodyWidget(provider)),
     );
   }
 
-  Widget _bodyWidget() {
+  Widget _bodyWidget(PatientProvider provider) {
     return Form(
       key: _formKey,
       child: Column(
@@ -40,7 +39,7 @@ class _PatientDeleteViewState extends State<PatientDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentPatient!.name!,
               enabled: false,
               decoration: const InputDecoration(
                 hintText: 'Adınızı girin',
@@ -51,7 +50,7 @@ class _PatientDeleteViewState extends State<PatientDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentPatient!.surname!,
               enabled: false,
               decoration: const InputDecoration(
                 hintText: 'Soyadınız girin',
@@ -62,10 +61,10 @@ class _PatientDeleteViewState extends State<PatientDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentPatient!.gender! ?'e':'k',
               enabled: false,
               decoration: const InputDecoration(
-                hintText: 'Soyadınız girin',
+                hintText: 'Cinsiyetinizi girin',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -73,10 +72,10 @@ class _PatientDeleteViewState extends State<PatientDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentPatient!.birthDate,
               enabled: false,
               decoration: const InputDecoration(
-                hintText: 'Soyadınız girin',
+                hintText: 'Doğum tarihinizi girin',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -85,14 +84,11 @@ class _PatientDeleteViewState extends State<PatientDeleteView> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
-                  print("validation complete");
+                  provider.deletePatient(provider.CurrentPatient!);
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Sil'),
             ),
           ),
         ],

@@ -100,7 +100,7 @@ class _SearchState extends StatelessWidget {
               return Center(
                 child: Text(
                   '${snapshot.error} occurred',
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
               );
             } else if (snapshot.hasData) {
@@ -113,12 +113,12 @@ class _SearchState extends StatelessWidget {
                       elevation: 4,
                       floating: true,
                       snap: true,
-                      title: Text(
+                      title: const Text(
                         "Search App",
                       ),
                       actions: <Widget>[
                         IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.search,
                           ),
                           onPressed: () async {

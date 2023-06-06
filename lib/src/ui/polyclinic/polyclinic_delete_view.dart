@@ -28,11 +28,11 @@ class _PolyclinicDeleteViewState extends State<PolyclinicDeleteView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget()),
+              : _bodyWidget(provider)),
     );
   }
 
-  Widget _bodyWidget() {
+  Widget _bodyWidget(PolyclinicProvider provider) {
     return Form(
       key: _formKey,
       child: Column(
@@ -40,10 +40,10 @@ class _PolyclinicDeleteViewState extends State<PolyclinicDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentPolyclinic!.name,
               enabled: false,
               decoration: const InputDecoration(
-                hintText: 'Başlangıç tarihi',
+                hintText: 'Poliklinik Adını Giriniz',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -51,32 +51,10 @@ class _PolyclinicDeleteViewState extends State<PolyclinicDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentPolyclinic!.employeList![0].name,
               enabled: false,
               decoration: const InputDecoration(
-                hintText: 'Bitiş tarihi',
-                border: OutlineInputBorder(),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: TextFormField(
-              initialValue: "taoeo",
-              enabled: false,
-              decoration: const InputDecoration(
-                hintText: 'Çalışan',
-                border: OutlineInputBorder(),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: TextFormField(
-              initialValue: "taoeo",
-              enabled: false,
-              decoration: const InputDecoration(
-                hintText: 'Hasta',
+                hintText: 'Çalışan seçiniz',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -85,14 +63,11 @@ class _PolyclinicDeleteViewState extends State<PolyclinicDeleteView> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
-                  print("validation complete");
+                  provider.deletePolyclinic(provider.CurrentPolyclinic!);
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Sil'),
             ),
           ),
         ],

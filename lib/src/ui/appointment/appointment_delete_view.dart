@@ -27,11 +27,11 @@ class _AppointmentDeleteViewState extends State<AppointmentDeleteView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget()),
+              : _bodyWidget(provider)),
     );
   }
 
-  Widget _bodyWidget() {
+  Widget _bodyWidget(AppointmentProvider provider) {
     return Form(
       key: _formKey,
       child: Column(
@@ -39,7 +39,7 @@ class _AppointmentDeleteViewState extends State<AppointmentDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentAppointment!.startDate,
               enabled: false,
               decoration: const InputDecoration(
                 hintText: 'Başlangıç tarihi',
@@ -50,7 +50,7 @@ class _AppointmentDeleteViewState extends State<AppointmentDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentAppointment!.endDate,
               enabled: false,
               decoration: const InputDecoration(
                 hintText: 'Bitiş tarihi',
@@ -61,7 +61,7 @@ class _AppointmentDeleteViewState extends State<AppointmentDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentAppointment!.employe!.name,
               enabled: false,
               decoration: const InputDecoration(
                 hintText: 'Çalışan',
@@ -72,7 +72,7 @@ class _AppointmentDeleteViewState extends State<AppointmentDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentAppointment!.patient!.name,
               enabled: false,
               decoration: const InputDecoration(
                 hintText: 'Hasta',
@@ -84,14 +84,11 @@ class _AppointmentDeleteViewState extends State<AppointmentDeleteView> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
-                  print("validation complete");
+                  provider.deleteAppointment(provider.CurrentAppointment!);
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Sil'),
             ),
           ),
         ],

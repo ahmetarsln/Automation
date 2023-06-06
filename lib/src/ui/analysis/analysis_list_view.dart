@@ -81,9 +81,10 @@ class _AnalysisListViewState extends State<AnalysisListView> {
                       ),
                       IconButton(
                         icon: Icon(Icons.delete),
-                        onPressed: () => {
+                        onPressed: () {
+                          value.changeAnalysis(analysis2[index]);
                           Navigator.of(context)
-                              .pushNamed(RoutesKeys.analysisDelete)
+                              .pushNamed(RoutesKeys.analysisDelete);
                         },
                       ),
                     ],

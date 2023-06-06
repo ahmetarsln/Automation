@@ -18,7 +18,6 @@ class _PatientEditViewState extends State<PatientEditView> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: const CustomAppBar(title: "Hasta Düzenleme"),
       drawer: const CustomDrawer(),
@@ -27,55 +26,67 @@ class _PatientEditViewState extends State<PatientEditView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget(context)),
+              : _bodyWidget(context, provider)),
     );
   }
 
-  Widget _bodyWidget(BuildContext context) {
+  Widget _bodyWidget(BuildContext context, PatientProvider provider) {
     return Form(
       key: _formKey,
       child: Column(
         children: [
           TextFormField(
-            initialValue:
-                Provider.of<PatientProvider>(context).CurrentPatient!.birthDate,
+            initialValue: provider.CurrentPatient!.tc.toString(),
             decoration: const InputDecoration(
               hintText: 'Tcnizi girin',
             ),
+            onChanged: (value) =>
+                provider.CurrentPatient!.tc = int.tryParse(value),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Bu alan boş olamaz';
               }
               return null;
             },
           ),
           TextFormField(
+            initialValue: provider.CurrentPatient!.name,
             decoration: const InputDecoration(
               hintText: 'Adınızı girin',
             ),
+            onChanged: (value) => provider.CurrentPatient!.name = value,
           ),
           TextFormField(
+            initialValue: provider.CurrentPatient!.surname,
             decoration: const InputDecoration(
               hintText: 'Soyadınız girin',
             ),
+            onChanged: (value) => provider.CurrentPatient!.surname = value,
           ),
           TextFormField(
+            initialValue: provider.CurrentPatient!.gender! ? 'e' : 'k',
             decoration: const InputDecoration(
-              hintText: 'Soyadınız girin',
+              hintText: 'Cinsiyetinizi girin',
             ),
+            onChanged: (value) =>
+                provider.CurrentPatient!.gender = value == 'e',
+          ),
+          TextFormField(
+            initialValue: provider.CurrentPatient!.birthDate,
+            decoration: const InputDecoration(
+              hintText: 'Doğum tarihinizi girin',
+            ),
+            onChanged: (value) => provider.CurrentPatient!.birthDate = value,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
-                  print("validation complete");
+                  provider.updatePatient(provider.CurrentPatient!);
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Düzenle'),
             ),
           ),
         ],

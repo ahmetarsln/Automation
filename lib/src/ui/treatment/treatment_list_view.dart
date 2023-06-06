@@ -29,7 +29,7 @@ class _TreatmentListViewState extends State<TreatmentListView> {
     );
 
     return Scaffold(
-      appBar: const CustomAppBar(title: "Reçeteler"),
+      appBar: const CustomAppBar(title: "Tedaviler"),
       drawer: const CustomDrawer(),
       body: Consumer<TreatmentProvider>(
           builder: (context, provider, child) => provider.isLoading

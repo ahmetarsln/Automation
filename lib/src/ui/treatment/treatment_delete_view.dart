@@ -19,8 +19,6 @@ class _TreatmentDeleteViewState extends State<TreatmentDeleteView> {
 
   @override
   Widget build(BuildContext context) {
-    
-
     return Scaffold(
       appBar: const CustomAppBar(title: "Reçete Silme"),
       drawer: const CustomDrawer(),
@@ -29,11 +27,11 @@ class _TreatmentDeleteViewState extends State<TreatmentDeleteView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget()),
+              : _bodyWidget(provider)),
     );
   }
 
-  Widget _bodyWidget() {
+  Widget _bodyWidget(TreatmentProvider provider) {
     return Form(
       key: _formKey,
       child: Column(
@@ -41,7 +39,7 @@ class _TreatmentDeleteViewState extends State<TreatmentDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentTreatment!.startDate,
               enabled: false,
               decoration: const InputDecoration(
                 hintText: 'Başlangıç tarihi',
@@ -52,7 +50,7 @@ class _TreatmentDeleteViewState extends State<TreatmentDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentTreatment!.endDate,
               enabled: false,
               decoration: const InputDecoration(
                 hintText: 'Bitiş tarihi',
@@ -63,7 +61,8 @@ class _TreatmentDeleteViewState extends State<TreatmentDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue:
+                  provider.CurrentTreatment!.appointments![0].startDate,
               enabled: false,
               decoration: const InputDecoration(
                 hintText: 'Randevu tarihi',
@@ -74,7 +73,7 @@ class _TreatmentDeleteViewState extends State<TreatmentDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentTreatment!.notes![0],
               enabled: false,
               decoration: const InputDecoration(
                 hintText: 'Notlar',
@@ -86,14 +85,11 @@ class _TreatmentDeleteViewState extends State<TreatmentDeleteView> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
-                  print("validation complete");
+                  provider.deleteTreatment(provider.CurrentTreatment!);
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Sil'),
             ),
           ),
         ],

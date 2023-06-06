@@ -88,7 +88,9 @@ class _AnalysisDeleteViewState extends State<AnalysisDeleteView> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                if (_formKey.currentState!.validate()) {}
+                if (_formKey.currentState!.validate()) {
+                  provider.deleteAnalysis(provider.CurrentAnalysis!);
+                }
               },
               child: const Text('Sil'),
             ),

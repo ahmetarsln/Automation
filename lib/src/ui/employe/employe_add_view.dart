@@ -1,4 +1,5 @@
 import 'package:demo/src/core/custom_drawer.dart';
+import 'package:demo/src/data/models/employe.dart';
 import 'package:demo/src/data/models/patient.dart';
 import 'package:demo/src/ui/appointment/appointment_provider.dart';
 import 'package:demo/src/ui/employe/employe_provider.dart';
@@ -18,10 +19,16 @@ class EmployeAddView extends StatefulWidget {
 
 class _EmployeAddViewState extends State<EmployeAddView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Employe employe = Employe(
+      name: null,
+      surname: null,
+      tc: null,
+      birthDate: null,
+      gender: null,
+      department: null);
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: const CustomAppBar(title: "Yeni Çalışan"),
       drawer: const CustomDrawer(),
@@ -30,63 +37,66 @@ class _EmployeAddViewState extends State<EmployeAddView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget()),
+              : _bodyWidget(provider)),
     );
   }
 
-  Widget _bodyWidget() {
+  Widget _bodyWidget(EmployeProvider provider) {
     return Form(
       key: _formKey,
       child: Column(
         children: [
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'Adınızı girin',
+              hintText: 'Adınızı giriniz',
             ),
+            onChanged: (value) => employe.name = value,
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Burası boş girilemez';
               }
               return null;
             },
           ),
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'Soyadınızı girin',
+              hintText: 'Soyadınızı giriniz',
             ),
+            onChanged: (value) => employe.surname = value,
           ),
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'Tcnizi girin',
+              hintText: 'Tcnizi giriniz',
             ),
+            onChanged: (value) => employe.tc = int.tryParse(value),
           ),
           TextFormField(
             decoration: const InputDecoration(
               hintText: 'Doğum tarihini giriniz',
             ),
+            onChanged: (value) => employe.birthDate = value,
           ),
           TextFormField(
             decoration: const InputDecoration(
               hintText: 'Cinsiyetinizi giriniz',
             ),
+            onChanged: (value) => employe.gender = value == 'e',
           ),
           TextFormField(
             decoration: const InputDecoration(
               hintText: 'Bölümünüzü giriniz',
             ),
+            onChanged: (value) => employe.department = value,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
-                  print("validation complete");
+                  provider.addEmploye(employe);
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Ekle'),
             ),
           ),
         ],

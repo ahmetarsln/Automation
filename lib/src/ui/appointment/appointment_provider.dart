@@ -49,7 +49,6 @@ class AppointmentProvider extends ChangeNotifier {
     }).catchError((e) {
       error = e;
     }).whenComplete(() => {isLoading = false, notifyListeners()});
-    
   }
 
   void updateAppointment(Appointment appointment) {
@@ -74,8 +73,12 @@ class AppointmentProvider extends ChangeNotifier {
 
   void addAppointment(Appointment appointment) {
     isLoading = true;
+
     notifyListeners();
     _appointmentRepository.addAppointment(appointment).then((value) {
+      print(value);
+      appointment.id =value.id!;
+      _appointmentRepository.updateAppointment(appointment);
       _appointmentList.add(appointment);
     }).catchError((e) {
       error = e;

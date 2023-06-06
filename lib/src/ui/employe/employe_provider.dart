@@ -73,6 +73,8 @@ class EmployeProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     _employeRepository.addEmploye(employe).then((value) {
+      employe.id =value.id!;
+      _employeRepository.updateEmploye(employe);
       _employeList.add(employe);
     }).catchError((e) {
       error = e;

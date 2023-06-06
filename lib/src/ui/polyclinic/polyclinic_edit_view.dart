@@ -1,5 +1,6 @@
 import 'package:demo/src/core/custom_app_bar.dart';
 import 'package:demo/src/core/custom_drawer.dart';
+import 'package:demo/src/data/models/employe.dart';
 import 'package:demo/src/data/models/patient.dart';
 import 'package:demo/src/ui/polyclinic/polyclinic_provider.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,6 @@ class _PolyclinicEditViewState extends State<PolyclinicEditView> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: const CustomAppBar(title: "Polkiinik Düzenleme"),
       drawer: const CustomDrawer(),
@@ -29,56 +29,58 @@ class _PolyclinicEditViewState extends State<PolyclinicEditView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget(context)),
+              : _bodyWidget(context, provider)),
     );
   }
 
-  Widget _bodyWidget(BuildContext context) {
+  Widget _bodyWidget(BuildContext context, PolyclinicProvider provider) {
     return Form(
       key: _formKey,
       child: Column(
         children: [
           TextFormField(
-            initialValue: Provider.of<PolyclinicProvider>(context)
-                .CurrentPolyclinic!
-                .name,
+            initialValue: provider.CurrentPolyclinic!.name,
             decoration: const InputDecoration(
-              hintText: 'Tcnizi girin',
+              hintText: 'Poliklinik Adını Giriniz',
             ),
+            onChanged: (value) => provider.CurrentPolyclinic!.name = value,
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Bu Kısım Boş Bırakılamaz';
               }
               return null;
             },
           ),
           TextFormField(
+            initialValue: provider.CurrentPolyclinic!.employeList![0].name,
             decoration: const InputDecoration(
-              hintText: 'Adınızı girin',
+              hintText: 'Çalışan seçiniz',
             ),
-          ),
-          TextFormField(
-            decoration: const InputDecoration(
-              hintText: 'Soyadınız girin',
-            ),
-          ),
-          TextFormField(
-            decoration: const InputDecoration(
-              hintText: 'Soyadınız girin',
-            ),
+            onChanged: (value) => provider.CurrentPolyclinic!.employeList = [
+              Employe(
+                  name: value,
+                  surname: value,
+                  tc: null,
+                  birthDate: null,
+                  gender: true,
+                  department: null)
+            ],
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Bu Kısım Boş Bırakılamaz';
+              }
+              return null;
+            },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
-                  print("validation complete");
+                  provider.updatePolyclinic(provider.CurrentPolyclinic!);
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Düzenle'),
             ),
           ),
         ],

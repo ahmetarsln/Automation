@@ -22,6 +22,8 @@ class _LoginViewState extends State<LoginView> {
       appBar: AppBar(
         title: const Text('Login'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
+        leading: null,
       ),
       body: Consumer<AuthProvider>(
         builder: (context, provider, child) => Center(
@@ -56,7 +58,7 @@ class _LoginViewState extends State<LoginView> {
                   AuthModel req = new AuthModel(
                       email: _emailController.text,
                       password: _passwordController.text);
-                      
+
                   provider.login(req, context);
                   print(
                       'Email: ${_emailController.text}, Password: ${_passwordController.text}');

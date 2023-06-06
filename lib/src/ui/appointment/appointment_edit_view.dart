@@ -1,3 +1,4 @@
+import 'package:demo/src/data/models/employe.dart';
 import 'package:demo/src/data/models/patient.dart';
 import 'package:demo/src/ui/appointment/appointment_provider.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,6 @@ class _AppointmentEditViewState extends State<AppointmentEditView> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: const CustomAppBar(title: "Randevu Düzenleme"),
       drawer: const CustomDrawer(),
@@ -29,54 +29,72 @@ class _AppointmentEditViewState extends State<AppointmentEditView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget(context)),
+              : _bodyWidget(context, provider)),
     );
   }
 
-  Widget _bodyWidget(BuildContext context) {
+  Widget _bodyWidget(BuildContext context, AppointmentProvider provider) {
     return Form(
       key: _formKey,
       child: Column(
         children: [
           TextFormField(
-            initialValue: Provider.of(context).startDate!.toString(),
+            initialValue: provider.CurrentAppointment!.startDate,
             decoration: const InputDecoration(
-              hintText: 'Tcnizi girin',
+              hintText: 'Başlangıç tarihi',
             ),
+            onChanged: (value) =>
+                provider.CurrentAppointment!.startDate = value,
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Burası boş kalamaz';
               }
               return null;
             },
           ),
           TextFormField(
+            initialValue: provider.CurrentAppointment!.endDate,
             decoration: const InputDecoration(
-              hintText: 'Adınızı girin',
+              hintText: 'Bitiş tarihi',
             ),
+            onChanged: (value) => provider.CurrentAppointment!.endDate = value,
           ),
           TextFormField(
+            initialValue: provider.CurrentAppointment!.employe!.name,
             decoration: const InputDecoration(
-              hintText: 'Soyadınız girin',
+              hintText: 'Çalışan',
             ),
+            onChanged: (value) => provider.CurrentAppointment!.employe =
+                Employe(
+                    name: value,
+                    surname: value,
+                    tc: null,
+                    birthDate: null,
+                    gender: null,
+                    department: null),
           ),
           TextFormField(
+            initialValue: provider.CurrentAppointment!.patient!.name,
             decoration: const InputDecoration(
-              hintText: 'Soyadınız girin',
+              hintText: 'Hasta',
             ),
+            onChanged: (value) => provider.CurrentAppointment!.patient =
+                Patient(
+                    tc: null,
+                    name: value,
+                    surname: value,
+                    birthDate: null,
+                    gender: null),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
-                  print("validation complete");
+                  provider.updateAppointment(provider.CurrentAppointment!);
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Düzenle'),
             ),
           ),
         ],

@@ -72,6 +72,8 @@ class PatientProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     _patientRepository.addPatient(patient).then((value) {
+      patient.id =value.id!;
+      _patientRepository.updatePatient(patient);
       _currentPatient = patient;
     }).catchError((e) {
       error = e;

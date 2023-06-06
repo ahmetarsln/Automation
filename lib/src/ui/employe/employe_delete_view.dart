@@ -19,7 +19,6 @@ class _EmployeDeleteViewState extends State<EmployeDeleteView> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: const CustomAppBar(title: "Çalışan Silme"),
       drawer: const CustomDrawer(),
@@ -28,11 +27,11 @@ class _EmployeDeleteViewState extends State<EmployeDeleteView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget()),
+              : _bodyWidget(provider)),
     );
   }
 
-  Widget _bodyWidget() {
+  Widget _bodyWidget(EmployeProvider provider) {
     return Form(
       key: _formKey,
       child: Column(
@@ -40,10 +39,10 @@ class _EmployeDeleteViewState extends State<EmployeDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentEmploye!.name,
               enabled: false,
               decoration: const InputDecoration(
-                hintText: 'Başlangıç tarihi',
+                hintText: 'Adıızı giriniz',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -51,10 +50,10 @@ class _EmployeDeleteViewState extends State<EmployeDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentEmploye!.surname,
               enabled: false,
               decoration: const InputDecoration(
-                hintText: 'Bitiş tarihi',
+                hintText: 'Soyadınız giriniz',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -62,10 +61,10 @@ class _EmployeDeleteViewState extends State<EmployeDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentEmploye!.tc.toString(),
               enabled: false,
               decoration: const InputDecoration(
-                hintText: 'Çalışan',
+                hintText: 'Tcnizi giriniz',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -73,10 +72,32 @@ class _EmployeDeleteViewState extends State<EmployeDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "taoeo",
+              initialValue: provider.CurrentEmploye!.birthDate,
               enabled: false,
               decoration: const InputDecoration(
-                hintText: 'Hasta',
+                hintText: 'Doğum tarihini giriniz',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: TextFormField(
+              initialValue: provider.CurrentEmploye!.gender! ?'e':'k',
+              enabled: false,
+              decoration: const InputDecoration(
+                hintText: 'Cinsiyetinizi giriniz',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: TextFormField(
+              initialValue: provider.CurrentEmploye!.department,
+              enabled: false,
+              decoration: const InputDecoration(
+                hintText: 'Bölümünüzü giriniz',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -85,14 +106,11 @@ class _EmployeDeleteViewState extends State<EmployeDeleteView> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
-                  print("validation complete");
+                  provider.deleteEmploye(provider.CurrentEmploye!);
                 }
               },
-              child: const Text('Submit'),
+              child: const Text('Sil'),
             ),
           ),
         ],
