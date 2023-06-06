@@ -22,7 +22,6 @@ class _PolyclinicDeleteViewState extends State<PolyclinicDeleteView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Poliklinik Silme"),
-      drawer: const CustomDrawer(),
       body: Consumer<PolyclinicProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(

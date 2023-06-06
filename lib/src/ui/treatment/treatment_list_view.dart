@@ -7,6 +7,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/app_constant.dart';
+
 class TreatmentListView extends StatefulWidget {
   const TreatmentListView({super.key});
 
@@ -36,24 +38,64 @@ class _TreatmentListViewState extends State<TreatmentListView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget()),
+              : _bodyWidget(provider)),
     );
   }
 
-  Widget _bodyWidget() {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return Card(
-          child: ListTile(
-            leading: FlutterLogo(size: 72.0),
-            title: Text(treatment2[index].notes![0]),
-            subtitle: Text(treatment2[index].startDate!.toString()),
-            trailing: Icon(Icons.more_vert),
-            isThreeLine: true,
+  Widget _bodyWidget(TreatmentProvider provider) {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: ElevatedButton(
+              child: const Text(
+                "Yeni Tahlil",
+                style: TextStyle(fontSize: 20),
+              ),
+              onPressed: () =>
+                  {Navigator.of(context).pushNamed(RoutesKeys.treatmentNew)},
+            ),
           ),
-        );
-      },
-      itemCount: treatment2.length,
+        ),
+        Expanded(
+          flex: 1,
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  leading: const Icon(Icons.supervised_user_circle, size: 48),
+                  title: Text(treatment2[index].notes![0]),
+                  subtitle: Text(treatment2[index].startDate!.toString()),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          provider.changeTreatment(treatment2[index]);
+                          Navigator.of(context)
+                              .pushNamed(RoutesKeys.treatmentEdit);
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          provider.changeTreatment(treatment2[index]);
+                          Navigator.of(context)
+                              .pushNamed(RoutesKeys.treatmentDelete);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+            itemCount: treatment2.length,
+          ),
+        ),
+      ],
     );
   }
 }

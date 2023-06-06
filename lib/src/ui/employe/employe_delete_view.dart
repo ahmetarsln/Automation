@@ -21,7 +21,6 @@ class _EmployeDeleteViewState extends State<EmployeDeleteView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Çalışan Silme"),
-      drawer: const CustomDrawer(),
       body: Consumer<EmployeProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(

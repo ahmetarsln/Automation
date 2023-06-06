@@ -21,7 +21,6 @@ class _TreatmentDeleteViewState extends State<TreatmentDeleteView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Reçete Silme"),
-      drawer: const CustomDrawer(),
       body: Consumer<TreatmentProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(

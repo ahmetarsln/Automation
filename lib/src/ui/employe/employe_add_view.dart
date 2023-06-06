@@ -31,7 +31,6 @@ class _EmployeAddViewState extends State<EmployeAddView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Yeni Çalışan"),
-      drawer: const CustomDrawer(),
       body: Consumer<EmployeProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(

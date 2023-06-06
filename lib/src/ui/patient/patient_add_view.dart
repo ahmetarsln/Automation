@@ -23,7 +23,6 @@ class _PatientAddViewState extends State<PatientAddView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Yeni Hasta"),
-      drawer: const CustomDrawer(),
       body: Consumer<PatientProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(

@@ -23,7 +23,6 @@ class _PolyclinicEditViewState extends State<PolyclinicEditView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Polkiinik Düzenleme"),
-      drawer: const CustomDrawer(),
       body: Consumer<PolyclinicProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(

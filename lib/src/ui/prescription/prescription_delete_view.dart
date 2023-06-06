@@ -21,7 +21,6 @@ class _PrescriptionDeleteViewState extends State<PrescriptionDeleteView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Reçete Silme"),
-      drawer: const CustomDrawer(),
       body: Consumer<PrescriptionProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(

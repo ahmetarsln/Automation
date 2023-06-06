@@ -20,7 +20,6 @@ class _PatientEditViewState extends State<PatientEditView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Hasta Düzenleme"),
-      drawer: const CustomDrawer(),
       body: Consumer<PatientProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(

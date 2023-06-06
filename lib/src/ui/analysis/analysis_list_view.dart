@@ -41,7 +41,7 @@ class _AnalysisListViewState extends State<AnalysisListView> {
     );
   }
 
-  Widget _bodyWidget(BuildContext context, AnalysisProvider value) {
+  Widget _bodyWidget(BuildContext context, AnalysisProvider provider) {
     return Column(
       children: [
         Align(
@@ -49,7 +49,7 @@ class _AnalysisListViewState extends State<AnalysisListView> {
           child: Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: ElevatedButton(
-              child: Text(
+              child: const Text(
                 "Yeni Tahlil",
                 style: TextStyle(fontSize: 20),
               ),
@@ -63,18 +63,18 @@ class _AnalysisListViewState extends State<AnalysisListView> {
             itemBuilder: (context, index) {
               return Card(
                 child: ListTile(
-                  leading: Icon(Icons.supervised_user_circle, size: 48),
-                  title: Text(analysis2[index].patient!.name! +
+                  leading: const Icon(Icons.supervised_user_circle, size: 48),
+                  title: Text(provider.analysisList[index].patient!.name! +
                       ' ' +
-                      analysis2[index].patient!.surname!),
-                  subtitle: Text(analysis2[index].patient!.tc!.toString()),
+                      provider.analysisList[index].patient!.surname!),
+                  subtitle: Text(provider.analysisList[index].finishdate!),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: () {
-                          value.changeAnalysis(analysis2[index]);
+                          provider.changeAnalysis(provider.analysisList[index]);
                           Navigator.of(context)
                               .pushNamed(RoutesKeys.analysisEdit);
                         },
@@ -82,7 +82,7 @@ class _AnalysisListViewState extends State<AnalysisListView> {
                       IconButton(
                         icon: Icon(Icons.delete),
                         onPressed: () {
-                          value.changeAnalysis(analysis2[index]);
+                          provider.changeAnalysis(provider.analysisList[index]);
                           Navigator.of(context)
                               .pushNamed(RoutesKeys.analysisDelete);
                         },
@@ -92,7 +92,7 @@ class _AnalysisListViewState extends State<AnalysisListView> {
                 ),
               );
             },
-            itemCount: analysis2.length,
+            itemCount: provider.analysisList.length,
           ),
         ),
       ],

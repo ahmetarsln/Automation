@@ -21,7 +21,6 @@ class _AppointmentDeleteViewState extends State<AppointmentDeleteView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Randevu Silme"),
-      drawer: const CustomDrawer(),
       body: Consumer<AppointmentProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(

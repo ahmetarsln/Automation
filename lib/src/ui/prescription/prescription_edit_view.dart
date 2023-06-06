@@ -23,7 +23,6 @@ class _PrescriptionEditViewState extends State<PrescriptionEditView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Reçete Silme"),
-      drawer: const CustomDrawer(),
       body: Consumer<PrescriptionProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(

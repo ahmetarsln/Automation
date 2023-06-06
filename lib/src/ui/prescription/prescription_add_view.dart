@@ -29,7 +29,6 @@ class _PrescriptionAddViewState extends State<PrescriptionAddView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Yeni Reçete"),
-      drawer: const CustomDrawer(),
       body: Consumer<PrescriptionProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(

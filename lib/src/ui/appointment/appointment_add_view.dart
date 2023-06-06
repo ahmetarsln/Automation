@@ -26,7 +26,6 @@ class _AppointmentAddViewState extends State<AppointmentAddView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Yeni Randevu"),
-      drawer: const CustomDrawer(),
       body: Consumer<AppointmentProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(
@@ -106,6 +105,8 @@ class _AppointmentAddViewState extends State<AppointmentAddView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.addAppointment(appointment);
+                  provider.fetchAppointments();
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Ekle'),

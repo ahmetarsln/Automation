@@ -7,6 +7,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/app_constant.dart';
+
 class EmployeListView extends StatefulWidget {
   const EmployeListView({super.key});
 
@@ -35,24 +37,66 @@ class _EmployeListViewState extends State<EmployeListView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget()),
+              : _bodyWidget(provider)),
     );
   }
 
-  Widget _bodyWidget() {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return Card(
-          child: ListTile(
-            title: Text(employe2[index].tc.toString()),
-            leading: const FlutterLogo(size: 72.0),
-            subtitle: Text(employe2[index].name!.toString()),
-            trailing: const Icon(Icons.more_vert),
-            isThreeLine: true,
+  Widget _bodyWidget(EmployeProvider provider) {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: ElevatedButton(
+              child: Text(
+                "Yeni Çalışan",
+                style: TextStyle(fontSize: 20),
+              ),
+              onPressed: () =>
+                  {Navigator.of(context).pushNamed(RoutesKeys.employeNew)},
+            ),
           ),
-        );
-      },
-      itemCount: employe2.length,
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  leading: Icon(Icons.supervised_user_circle, size: 48),
+                  title: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(employe2[index].tc.toString())),
+                  subtitle: Text(employe2[index].name!.toString()),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          provider.changeEmploye(employe2[index]);
+                          Navigator.of(context)
+                              .pushNamed(RoutesKeys.employeEdit);
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          provider.changeEmploye(employe2[index]);
+                          Navigator.of(context)
+                              .pushNamed(RoutesKeys.employeDelete);
+                        },
+                      ),
+                    ],
+                  ),
+                  isThreeLine: true,
+                ),
+              );
+            },
+            itemCount: employe2.length,
+          ),
+        ),
+      ],
     );
   }
 }

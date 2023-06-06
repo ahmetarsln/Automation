@@ -22,7 +22,6 @@ class _EmployeEditViewState extends State<EmployeEditView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Çalışan Düzenleme"),
-      drawer: const CustomDrawer(),
       body: Consumer<EmployeProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(

@@ -22,7 +22,6 @@ class _AnalysisDeleteViewState extends State<AnalysisDeleteView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Tahlil Silme"),
-      drawer: const CustomDrawer(),
       body: Consumer<AnalysisProvider>(
         builder: (context, provider, child) => provider.isLoading
             ? const Center(
@@ -90,6 +89,7 @@ class _AnalysisDeleteViewState extends State<AnalysisDeleteView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.deleteAnalysis(provider.CurrentAnalysis!);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Sil'),

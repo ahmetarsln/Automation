@@ -52,7 +52,7 @@ class _AppointmentListViewState extends State<AppointmentListView> {
             padding: const EdgeInsets.only(right: 8.0),
             child: ElevatedButton(
               child: Text(
-                "Yeni Tahlil",
+                "Yeni Randevu",
                 style: TextStyle(fontSize: 20),
               ),
               onPressed: () =>
@@ -66,31 +66,20 @@ class _AppointmentListViewState extends State<AppointmentListView> {
               return Card(
                 child: ListTile(
                   leading: Icon(Icons.supervised_user_circle, size: 48),
-                  title: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      appointment2[index].patient!.name! +
-                          ' ' +
-                          appointment2[index].patient!.surname!,
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue),
-                    ),
+                  title: Text(
+                    provider.appointmentList[index].patient!.name! +
+                        ' ' +
+                        provider.appointmentList[index].patient!.surname!,
                   ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(appointment2[index].startDate! +
-                        ' - ' +
-                        appointment2[index].endDate!),
-                  ),
+                  subtitle: Text(provider.appointmentList[index].endDate!),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: () {
-                          provider.changeAppointment(appointment2[index]);
+                          provider.changeAppointment(
+                              provider.appointmentList[index]);
                           Navigator.of(context)
                               .pushNamed(RoutesKeys.appointmentEdit);
                         },
@@ -98,18 +87,18 @@ class _AppointmentListViewState extends State<AppointmentListView> {
                       IconButton(
                         icon: Icon(Icons.delete),
                         onPressed: () {
-                          provider.changeAppointment(appointment2[index]);
+                          provider.changeAppointment(
+                              provider.appointmentList[index]);
                           Navigator.of(context)
                               .pushNamed(RoutesKeys.appointmentEdit);
                         },
                       ),
                     ],
                   ),
-                  isThreeLine: true,
                 ),
               );
             },
-            itemCount: appointment2.length,
+            itemCount: provider.appointmentList.length,
           ),
         ),
       ],

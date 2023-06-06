@@ -7,6 +7,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/app_constant.dart';
+
 class PrescriptionListView extends StatefulWidget {
   const PrescriptionListView({super.key});
 
@@ -36,26 +38,65 @@ class _PrescriptionListViewState extends State<PrescriptionListView> {
               ? const Center(
                   child: Text("Yükleniyor"),
                 )
-              : _bodyWidget()),
+              : _bodyWidget(provider)),
     );
   }
 
-  Widget _bodyWidget() {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return Card(
-          child: ListTile(
-            leading: FlutterLogo(size: 72.0),
-            title: Text(prescription2[index].patient!.name! +
-                ' ' +
-                prescription2[index].patient!.surname!),
-            subtitle: Text(prescription2[index].patient!.tc!.toString()),
-            trailing: Icon(Icons.more_vert),
-            isThreeLine: true,
+  Widget _bodyWidget(PrescriptionProvider provider) {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: ElevatedButton(
+              child: const Text(
+                "Yeni Reçete",
+                style: TextStyle(fontSize: 20),
+              ),
+              onPressed: () =>
+                  {Navigator.of(context).pushNamed(RoutesKeys.analysisNew)},
+            ),
           ),
-        );
-      },
-      itemCount: prescription2.length,
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  leading: FlutterLogo(size: 72.0),
+                  title: Text(prescription2[index].patient!.name! +
+                      ' ' +
+                      prescription2[index].patient!.surname!),
+                  subtitle: Text(prescription2[index].patient!.tc!.toString()),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          provider.changePrescription(prescription2[index]);
+                          Navigator.of(context)
+                              .pushNamed(RoutesKeys.prescriptionEdit);
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          provider.changePrescription(prescription2[index]);
+                          Navigator.of(context)
+                              .pushNamed(RoutesKeys.prescriptionDelete);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+            itemCount: prescription2.length,
+          ),
+        ),
+      ],
     );
   }
 }

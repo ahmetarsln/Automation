@@ -22,7 +22,6 @@ class _TreatmentEditViewState extends State<TreatmentEditView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Reçete Düzenleme"),
-      drawer: const CustomDrawer(),
       body: Consumer<TreatmentProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(

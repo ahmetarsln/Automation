@@ -23,7 +23,6 @@ class _AppointmentEditViewState extends State<AppointmentEditView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Randevu Düzenleme"),
-      drawer: const CustomDrawer(),
       body: Consumer<AppointmentProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(

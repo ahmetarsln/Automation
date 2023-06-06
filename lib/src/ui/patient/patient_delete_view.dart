@@ -21,7 +21,6 @@ class _PatientDeleteViewState extends State<PatientDeleteView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Hasta Silme"),
-      drawer: const CustomDrawer(),
       body: Consumer<PatientProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(

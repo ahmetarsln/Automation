@@ -4,6 +4,7 @@ import 'package:demo/src/ui/analysis/analysis_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/custom_app_bar.dart';
@@ -18,13 +19,16 @@ class AnalysisAddView extends StatefulWidget {
 
 class _AnalysisAddViewState extends State<AnalysisAddView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  Analysis analysis = Analysis(parameters: null, patient: null);
+  Analysis analysis = Analysis(
+    parameters: null,
+    patient: null,
+    notificationDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Yeni Tahlil"),
-      drawer: const CustomDrawer(),
       body: Consumer<AnalysisProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(
@@ -40,6 +44,7 @@ class _AnalysisAddViewState extends State<AnalysisAddView> {
       child: Column(
         children: [
           TextFormField(
+            initialValue: DateFormat('yyyy-MM-dd').format(DateTime.now()),
             decoration: const InputDecoration(
               hintText: 'başlangıç tarih',
             ),
@@ -73,7 +78,7 @@ class _AnalysisAddViewState extends State<AnalysisAddView> {
               }
               return null;
             },
-            onChanged: (newValue) => analysis.patient = new Patient(
+            onChanged: (newValue) => analysis.patient = Patient(
                 name: newValue,
                 surname: newValue,
                 birthDate: null,
@@ -98,6 +103,7 @@ class _AnalysisAddViewState extends State<AnalysisAddView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.addAnalysis(analysis);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Ekle'),

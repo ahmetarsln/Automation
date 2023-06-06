@@ -22,7 +22,6 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: "Tahlil Düzenleme"),
-      drawer: const CustomDrawer(),
       body: Consumer<AnalysisProvider>(
           builder: (context, provider, child) => provider.isLoading
               ? const Center(
@@ -48,6 +47,8 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
               }
               return null;
             },
+            onChanged: (newValue) =>
+                provider.CurrentAnalysis!.parameters = newValue,
           ),
           TextFormField(
             initialValue: provider.CurrentAnalysis!.patient!.name! +
@@ -62,6 +63,13 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
               }
               return null;
             },
+            onChanged: (newValue) => provider.CurrentAnalysis!.patient =
+                Patient(
+                    name: newValue,
+                    surname: newValue,
+                    birthDate: null,
+                    gender: null,
+                    tc: null),
           ),
           TextFormField(
             initialValue: provider.CurrentAnalysis!.notificationDate!,
@@ -74,6 +82,8 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
               }
               return null;
             },
+            onChanged: (newValue) =>
+                provider.CurrentAnalysis!.notificationDate = newValue,
           ),
           TextFormField(
             initialValue: provider.CurrentAnalysis!.finishdate,
@@ -86,6 +96,8 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
               }
               return null;
             },
+            onChanged: (newValue) =>
+                provider.CurrentAnalysis!.finishdate = newValue,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -93,6 +105,7 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.updateAnalysis(provider.CurrentAnalysis!);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Kaydet'),
