@@ -17,7 +17,7 @@ class Polyclinic {
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['employeList'] = this.employeList;
+    data['employeList'] = this.employeList?.map((e) => e.toJson()).toList();
     data['name'] = this.name;
     data['id'] = this.id;
     return data;

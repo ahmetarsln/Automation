@@ -83,6 +83,7 @@ class _PatientEditViewState extends State<PatientEditView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.updatePatient(provider.CurrentPatient!);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Düzenle'),

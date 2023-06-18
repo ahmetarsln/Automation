@@ -92,6 +92,7 @@ class _EmployeEditViewState extends State<EmployeEditView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.updateEmploye(provider.CurrentEmploye!);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Düzenle'),

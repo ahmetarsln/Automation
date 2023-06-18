@@ -60,8 +60,7 @@ class _TreatmentDeleteViewState extends State<TreatmentDeleteView> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextFormField(
-              initialValue:
-                  provider.CurrentTreatment!.appointments![0].startDate,
+              initialValue: provider.CurrentTreatment!.appointments![0],
               enabled: false,
               decoration: const InputDecoration(
                 hintText: 'Randevu tarihi',
@@ -86,6 +85,7 @@ class _TreatmentDeleteViewState extends State<TreatmentDeleteView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.deleteTreatment(provider.CurrentTreatment!);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Sil'),

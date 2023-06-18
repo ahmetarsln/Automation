@@ -63,7 +63,7 @@ class TreatmentProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     _treatmentRepository.deleteTreatment(treatment.id!).then((value) {
-      _currentTreatment = null;
+      _treatmentList.remove(treatment);
     }).catchError((e) {
       error = e;
     }).whenComplete(() => {isLoading = false, notifyListeners()});
@@ -75,7 +75,7 @@ class TreatmentProvider extends ChangeNotifier {
     _treatmentRepository.addTreatment(treatment).then((value) {
       treatment.id = value.id!;
       _treatmentRepository.updateTreatment(treatment);
-      _currentTreatment = treatment;
+      _treatmentList.add(treatment);
     }).catchError((e) {
       error = e;
     }).whenComplete(() => {isLoading = false, notifyListeners()});

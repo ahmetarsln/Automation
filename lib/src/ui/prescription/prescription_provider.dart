@@ -1,4 +1,3 @@
-
 import 'package:demo/src/data/models/prescription.dart';
 import 'package:flutter/material.dart';
 
@@ -36,12 +35,13 @@ class PrescriptionProvider extends ChangeNotifier {
     }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
 
-  void fetchPrescriptions(){
+  void fetchPrescriptions() {
     isLoading = true;
     notifyListeners();
     _prescriptionRepository.getPrescriptions().then((value) {
       _prescriptionList = [];
       for (var element in value.docs) {
+        print("buarada");
         _prescriptionList.add(Prescription.fromJson(element.data()));
       }
     }).catchError((e) {
@@ -58,12 +58,12 @@ class PrescriptionProvider extends ChangeNotifier {
       error = e;
     }).whenComplete(() => {isLoading = false, notifyListeners()});
   }
-  
+
   void deletePrescription(Prescription prescription) {
     isLoading = true;
     notifyListeners();
     _prescriptionRepository.deletePrescription(prescription.id!).then((value) {
-      _currentPrescription = prescription;
+      _prescriptionList.remove(prescription);
     }).catchError((e) {
       error = e;
     }).whenComplete(() => {isLoading = false, notifyListeners()});
@@ -73,9 +73,9 @@ class PrescriptionProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     _prescriptionRepository.addPrescription(prescription).then((value) {
-      prescription.id =value.id!;
+      prescription.id = value.id!;
       _prescriptionRepository.updatePrescription(prescription);
-      _currentPrescription = prescription;
+      _prescriptionList.add(prescription);
     }).catchError((e) {
       error = e;
     }).whenComplete(() => {isLoading = false, notifyListeners()});

@@ -91,6 +91,7 @@ class _AppointmentEditViewState extends State<AppointmentEditView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.updateAppointment(provider.CurrentAppointment!);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Düzenle'),

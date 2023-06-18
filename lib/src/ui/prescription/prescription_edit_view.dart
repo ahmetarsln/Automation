@@ -110,6 +110,7 @@ class _PrescriptionEditViewState extends State<PrescriptionEditView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.updatePrescription(provider.CurrentPrescription!);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Düzenle'),

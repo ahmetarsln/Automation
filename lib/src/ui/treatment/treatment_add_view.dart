@@ -8,6 +8,7 @@ import 'package:demo/src/ui/treatment/treatment_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class TreatmentAddView extends StatefulWidget {
@@ -19,8 +20,10 @@ class TreatmentAddView extends StatefulWidget {
 
 class _TreatmentAddViewState extends State<TreatmentAddView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  Treatment treatment =
-      Treatment(startDate: null, appointments: null, notes: null);
+  Treatment treatment = Treatment(
+      startDate: DateFormat('dd-MM-yyyy').format(DateTime.now()),
+      appointments: null,
+      notes: null);
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +44,7 @@ class _TreatmentAddViewState extends State<TreatmentAddView> {
       child: Column(
         children: [
           TextFormField(
+            initialValue: DateFormat('dd-MM-yyyy').format(DateTime.now()),
             decoration: const InputDecoration(
               hintText: 'başlangıç tarihi',
             ),
@@ -68,13 +72,7 @@ class _TreatmentAddViewState extends State<TreatmentAddView> {
             decoration: const InputDecoration(
               hintText: 'Randevu Giriniz',
             ),
-            onChanged: (value) => treatment.appointments = [
-              Appointment(
-                  startDate: value,
-                  endDate: value,
-                  employe: null,
-                  patient: null)
-            ],
+            onChanged: (value) => treatment.appointments = [value],
             validator: (String? value) {
               if (value == null || value.isEmpty) {
                 return 'Bu Kısım Boş Olamz';
@@ -98,11 +96,9 @@ class _TreatmentAddViewState extends State<TreatmentAddView> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
-                  // Process data.
                   provider.addTreatment(treatment);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Ekle'),

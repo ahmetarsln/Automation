@@ -44,7 +44,7 @@ class _AnalysisAddViewState extends State<AnalysisAddView> {
       child: Column(
         children: [
           TextFormField(
-            initialValue: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+            initialValue: DateFormat('dd-MM-yyyy').format(DateTime.now()),
             decoration: const InputDecoration(
               hintText: 'başlangıç tarih',
             ),

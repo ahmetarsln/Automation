@@ -24,6 +24,7 @@ class Patient {
     surname = json['surname'];
     birthDate = json['birthDate'];
     gender = json['gender'];
+    id = json['id'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -32,6 +33,7 @@ class Patient {
     data['surname'] = this.surname;
     data['birthDate'] = this.birthDate;
     data['gender'] = this.gender;
+    data['id'] = this.id;
     return data;
   }
 }

@@ -93,6 +93,7 @@ class _EmployeAddViewState extends State<EmployeAddView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.addEmploye(employe);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Ekle'),

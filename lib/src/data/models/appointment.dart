@@ -19,6 +19,7 @@ class Appointment {
 
   Appointment.fromJson(Map<String, dynamic> json) {
     startDate = json["startDate"];
+    id = json["id"];
     endDate = json["endDate"];
     employe = Employe.fromJson(json["employe"]);
     patient = Patient.fromJson(json["patient"]);
@@ -26,9 +27,11 @@ class Appointment {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['startDate'] = this.startDate;
+    data['id'] = this.id;
+
     data['endDate'] = this.endDate;
-    data['employe'] = this.employe;
-    data['patient'] = this.patient;
+    data['employe'] = this.employe?.toJson();
+    data['patient'] = this.patient?.toJson();
 
     return data;
   }

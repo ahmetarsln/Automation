@@ -76,8 +76,8 @@ class AppointmentProvider extends ChangeNotifier {
 
     notifyListeners();
     _appointmentRepository.addAppointment(appointment).then((value) {
-      print(value);
-      appointment.id =value.id!;
+      
+      appointment.id = value.id!;
       _appointmentRepository.updateAppointment(appointment);
       _appointmentList.add(appointment);
     }).catchError((e) {

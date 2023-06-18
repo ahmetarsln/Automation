@@ -18,18 +18,9 @@ class PrescriptionListView extends StatefulWidget {
 
 class _PrescriptionListViewState extends State<PrescriptionListView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late var prescription2 = <Prescription>[];
 
   @override
   Widget build(BuildContext context) {
-    prescriptions().then(
-      (value) {
-        setState(() {
-          prescription2 = value;
-        });
-      },
-    );
-
     return Scaffold(
       appBar: const CustomAppBar(title: "Reçeteler"),
       drawer: const CustomDrawer(),
@@ -43,6 +34,7 @@ class _PrescriptionListViewState extends State<PrescriptionListView> {
   }
 
   Widget _bodyWidget(PrescriptionProvider provider) {
+    print(provider.prescriptionList.length);
     return Column(
       children: [
         Align(
@@ -55,7 +47,7 @@ class _PrescriptionListViewState extends State<PrescriptionListView> {
                 style: TextStyle(fontSize: 20),
               ),
               onPressed: () =>
-                  {Navigator.of(context).pushNamed(RoutesKeys.analysisNew)},
+                  {Navigator.of(context).pushNamed(RoutesKeys.prescriptionNew)},
             ),
           ),
         ),
@@ -65,17 +57,19 @@ class _PrescriptionListViewState extends State<PrescriptionListView> {
               return Card(
                 child: ListTile(
                   leading: FlutterLogo(size: 72.0),
-                  title: Text(prescription2[index].patient!.name! +
+                  title: Text(provider.prescriptionList[index].patient!.name! +
                       ' ' +
-                      prescription2[index].patient!.surname!),
-                  subtitle: Text(prescription2[index].patient!.tc!.toString()),
+                      provider.prescriptionList[index].patient!.surname!),
+                  subtitle: Text(
+                      provider.prescriptionList[index].medicationNames![0]),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: () {
-                          provider.changePrescription(prescription2[index]);
+                          provider.changePrescription(
+                              provider.prescriptionList[index]);
                           Navigator.of(context)
                               .pushNamed(RoutesKeys.prescriptionEdit);
                         },
@@ -83,7 +77,8 @@ class _PrescriptionListViewState extends State<PrescriptionListView> {
                       IconButton(
                         icon: Icon(Icons.delete),
                         onPressed: () {
-                          provider.changePrescription(prescription2[index]);
+                          provider.changePrescription(
+                              provider.prescriptionList[index]);
                           Navigator.of(context)
                               .pushNamed(RoutesKeys.prescriptionDelete);
                         },
@@ -93,7 +88,7 @@ class _PrescriptionListViewState extends State<PrescriptionListView> {
                 ),
               );
             },
-            itemCount: prescription2.length,
+            itemCount: provider.prescriptionList.length,
           ),
         ),
       ],

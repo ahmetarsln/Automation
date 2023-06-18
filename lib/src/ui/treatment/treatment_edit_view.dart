@@ -32,6 +32,7 @@ class _TreatmentEditViewState extends State<TreatmentEditView> {
   }
 
   Widget _bodyWidget(BuildContext context, TreatmentProvider provider) {
+    print(provider.CurrentTreatment!.appointments!);
     return Form(
       key: _formKey,
       child: Column(
@@ -63,7 +64,7 @@ class _TreatmentEditViewState extends State<TreatmentEditView> {
             onChanged: (value) => provider.CurrentTreatment!.endDate = value,
           ),
           TextFormField(
-            initialValue: provider.CurrentTreatment!.appointments![0].startDate,
+            initialValue: provider.CurrentTreatment!.appointments![0],
             decoration: const InputDecoration(
               hintText: 'Randevular',
             ),
@@ -74,14 +75,7 @@ class _TreatmentEditViewState extends State<TreatmentEditView> {
               return null;
             },
             onChanged: (value) =>
-                provider.CurrentTreatment!.appointments ==
-                [
-                  Appointment(
-                      startDate: value,
-                      endDate: value,
-                      employe: null,
-                      patient: null)
-                ],
+                provider.CurrentTreatment!.appointments == [value],
           ),
           TextFormField(
             initialValue: provider.CurrentTreatment!.notes![0],
@@ -102,6 +96,7 @@ class _TreatmentEditViewState extends State<TreatmentEditView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.updateTreatment(provider.CurrentTreatment!);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Düzenle'),

@@ -107,6 +107,7 @@ class _EmployeDeleteViewState extends State<EmployeDeleteView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.deleteEmploye(provider.CurrentEmploye!);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Sil'),

@@ -109,6 +109,7 @@ class _PrescriptionAddViewState extends State<PrescriptionAddView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.addPrescription(prescription);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Ekle'),

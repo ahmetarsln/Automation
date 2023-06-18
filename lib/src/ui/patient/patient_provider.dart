@@ -62,7 +62,7 @@ class PatientProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     _patientRepository.deletePatient(patient.id!).then((value) {
-      _currentPatient = patient;
+      _patientList.remove(patient);
     }).catchError((e) {
       error = e;
     }).whenComplete(() => {isLoading = false, notifyListeners()});
@@ -72,9 +72,9 @@ class PatientProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     _patientRepository.addPatient(patient).then((value) {
-      patient.id =value.id!;
+      patient.id = value.id!;
       _patientRepository.updatePatient(patient);
-      _currentPatient = patient;
+      _patientList.add(patient);
     }).catchError((e) {
       error = e;
     }).whenComplete(() => {isLoading = false, notifyListeners()});

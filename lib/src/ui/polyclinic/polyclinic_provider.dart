@@ -62,7 +62,7 @@ class PolyclinicProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     _polyclinicRepository.deletePolyclinic(polyclinic.id!).then((value) {
-      _currentPolyclinic = polyclinic;
+      _polyclinicList.remove(polyclinic);
     }).catchError((e) {
       error = e;
     }).whenComplete(() => {isLoading = false, notifyListeners()});
@@ -72,9 +72,9 @@ class PolyclinicProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     _polyclinicRepository.addPolyclinic(polyclinic).then((value) {
-      polyclinic.id =value.id!;
+      polyclinic.id = value.id!;
       _polyclinicRepository.updatePolyclinic(polyclinic);
-      _currentPolyclinic = polyclinic;
+      _polyclinicList.add(polyclinic);
     }).catchError((e) {
       error = e;
     }).whenComplete(() => {isLoading = false, notifyListeners()});

@@ -85,6 +85,7 @@ class _AppointmentDeleteViewState extends State<AppointmentDeleteView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.deleteAppointment(provider.CurrentAppointment!);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Sil'),

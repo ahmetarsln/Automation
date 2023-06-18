@@ -77,7 +77,7 @@ class AnalysisProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     _analysisRepository.addAnalysis(analysis).then((value) {
-      print(value.id!);
+      
       analysis.id = value.id!;
       _analysisRepository.updateAnalysis(analysis);
       _analysisList.add(analysis);

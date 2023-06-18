@@ -59,20 +59,22 @@ class _PolyclinicListViewState extends State<PolyclinicListView> {
             ),
           ),
         ),
-        ListView.builder(
-          itemBuilder: (context, index) {
-            return Card(
-              child: ListTile(
-                leading: const Icon(Icons.supervised_user_circle, size: 48),
-                title: Text(polyclinic2[index].name!),
-                subtitle: Text(polyclinic2[index].id!.toString()),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
+        Expanded(
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  leading: const Icon(Icons.supervised_user_circle, size: 48),
+                  title: Text(provider.polyclinicList[index].name!),
+                  subtitle: Text(provider.polyclinicList[index].id!.toString()),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: () {
-                          provider.changePolyclinic(polyclinic2[index]);
+                          provider
+                              .changePolyclinic(provider.polyclinicList[index]);
                           Navigator.of(context)
                               .pushNamed(RoutesKeys.polyclinicEdit);
                         },
@@ -80,18 +82,19 @@ class _PolyclinicListViewState extends State<PolyclinicListView> {
                       IconButton(
                         icon: Icon(Icons.delete),
                         onPressed: () {
-                          provider.changePolyclinic(polyclinic2[index]);
+                          provider
+                              .changePolyclinic(provider.polyclinicList[index]);
                           Navigator.of(context)
                               .pushNamed(RoutesKeys.polyclinicDelete);
                         },
                       ),
-                  ],
+                    ],
+                  ),
                 ),
-                isThreeLine: true,
-              ),
-            );
-          },
-          itemCount: polyclinic2.length,
+              );
+            },
+            itemCount: provider.polyclinicList.length,
+          ),
         ),
       ],
     );

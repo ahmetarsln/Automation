@@ -8,6 +8,7 @@ import 'package:demo/src/ui/appointment/appointment_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class AppointmentAddView extends StatefulWidget {
@@ -19,8 +20,11 @@ class AppointmentAddView extends StatefulWidget {
 
 class _AppointmentAddViewState extends State<AppointmentAddView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  Appointment appointment =
-      Appointment(startDate: null, endDate: null, employe: null, patient: null);
+  Appointment appointment = Appointment(
+      startDate: DateFormat('dd-MM-yyyy').format(DateTime.now()),
+      endDate: null,
+      employe: null,
+      patient: null);
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +45,9 @@ class _AppointmentAddViewState extends State<AppointmentAddView> {
       child: Column(
         children: [
           TextFormField(
+            initialValue: DateFormat('dd-MM-yyyy').format(DateTime.now()),
             decoration: const InputDecoration(
-              hintText: 'başlangıç tarihi',
+              hintText: 'Başlangıç tarihi',
             ),
             onChanged: (value) => appointment.startDate = value,
             validator: (String? value) {
@@ -105,7 +110,6 @@ class _AppointmentAddViewState extends State<AppointmentAddView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.addAppointment(appointment);
-                  provider.fetchAppointments();
                   Navigator.of(context).pop();
                 }
               },

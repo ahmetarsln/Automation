@@ -77,6 +77,7 @@ class _PolyclinicEditViewState extends State<PolyclinicEditView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.updatePolyclinic(provider.CurrentPolyclinic!);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Düzenle'),

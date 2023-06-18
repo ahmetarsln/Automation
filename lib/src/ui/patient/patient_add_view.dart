@@ -79,6 +79,7 @@ class _PatientAddViewState extends State<PatientAddView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.addPatient(patient);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Ekle'),

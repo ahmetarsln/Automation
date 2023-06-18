@@ -18,18 +18,9 @@ class TreatmentListView extends StatefulWidget {
 
 class _TreatmentListViewState extends State<TreatmentListView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late var treatment2 = <Treatment>[];
 
   @override
   Widget build(BuildContext context) {
-    treatment().then(
-      (value) {
-        setState(() {
-          treatment2 = value;
-        });
-      },
-    );
-
     return Scaffold(
       appBar: const CustomAppBar(title: "Tedaviler"),
       drawer: const CustomDrawer(),
@@ -51,7 +42,7 @@ class _TreatmentListViewState extends State<TreatmentListView> {
             padding: const EdgeInsets.only(right: 8.0),
             child: ElevatedButton(
               child: const Text(
-                "Yeni Tahlil",
+                "Yeni Tedavi",
                 style: TextStyle(fontSize: 20),
               ),
               onPressed: () =>
@@ -60,21 +51,22 @@ class _TreatmentListViewState extends State<TreatmentListView> {
           ),
         ),
         Expanded(
-          flex: 1,
           child: ListView.builder(
             itemBuilder: (context, index) {
               return Card(
                 child: ListTile(
                   leading: const Icon(Icons.supervised_user_circle, size: 48),
-                  title: Text(treatment2[index].notes![0]),
-                  subtitle: Text(treatment2[index].startDate!.toString()),
+                  title: Text(provider.treatmentList[index].notes![0]),
+                  subtitle:
+                      Text(provider.treatmentList[index].endDate!.toString()),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: () {
-                          provider.changeTreatment(treatment2[index]);
+                          provider
+                              .changeTreatment(provider.treatmentList[index]);
                           Navigator.of(context)
                               .pushNamed(RoutesKeys.treatmentEdit);
                         },
@@ -82,7 +74,8 @@ class _TreatmentListViewState extends State<TreatmentListView> {
                       IconButton(
                         icon: Icon(Icons.delete),
                         onPressed: () {
-                          provider.changeTreatment(treatment2[index]);
+                          provider
+                              .changeTreatment(provider.treatmentList[index]);
                           Navigator.of(context)
                               .pushNamed(RoutesKeys.treatmentDelete);
                         },
@@ -92,7 +85,7 @@ class _TreatmentListViewState extends State<TreatmentListView> {
                 ),
               );
             },
-            itemCount: treatment2.length,
+            itemCount: provider.treatmentList.length,
           ),
         ),
       ],

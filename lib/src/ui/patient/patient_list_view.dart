@@ -42,7 +42,7 @@ class _PatientListViewState extends State<PatientListView> {
     );
   }
 
-  Widget _bodyWidget(PatientProvider value) {
+  Widget _bodyWidget(PatientProvider provider) {
     return Column(
       children: [
         Align(
@@ -66,15 +66,15 @@ class _PatientListViewState extends State<PatientListView> {
                 child: ListTile(
                   leading: const Icon(Icons.supervised_user_circle, size: 48),
                   title: Text(
-                      patient2[index].name! + ' ' + patient2[index].surname!),
-                  subtitle: Text(patient2[index].tc!.toString()),
+                      provider.patientList[index].name! + ' ' + provider.patientList[index].surname!),
+                  subtitle: Text(provider.patientList[index].tc!.toString()),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: () {
-                          value.changePatient(patient2[index]);
+                          provider.changePatient(provider.patientList[index]);
                           Navigator.of(context)
                               .pushNamed(RoutesKeys.patientEdit);
                         },
@@ -82,7 +82,7 @@ class _PatientListViewState extends State<PatientListView> {
                       IconButton(
                         icon: Icon(Icons.delete),
                         onPressed: () {
-                          value.changePatient(patient2[index]);
+                          provider.changePatient(provider.patientList[index]);
                           Navigator.of(context)
                               .pushNamed(RoutesKeys.patientDelete);
                         },
@@ -92,7 +92,7 @@ class _PatientListViewState extends State<PatientListView> {
                 ),
               );
             },
-            itemCount: patient2.length,
+            itemCount: provider.patientList.length,
           ),
         ),
       ],

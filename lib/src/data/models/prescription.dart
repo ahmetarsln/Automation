@@ -13,26 +13,26 @@ class Prescription {
   Patient? patient;
 
   Prescription(
-      {
-      required this.id,
+      {required this.id,
       required this.medicationNames,
       required this.date,
       required this.employe,
       required this.patient});
 
   Prescription.fromJson(Map<String, dynamic> json) {
-    medicationNames = [json["medicationNames"]];
+    medicationNames = json["medicationNames"].cast<String>();
     date = json["date"];
     employe = Employe.fromJson(json["employe"]);
     patient = Patient.fromJson(json["patient"]);
+    id = json['id'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['medicationNames'] = this.medicationNames;
     data['date'] = this.date;
-    data['employe'] = this.employe;
-    data['patient'] = this.patient;
-
+    data['employe'] = this.employe?.toJson();
+    data['patient'] = this.patient?.toJson();
+    data['id'] = this.id;
     return data;
   }
 }

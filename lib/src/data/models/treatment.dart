@@ -7,7 +7,7 @@ class Treatment {
   String? id;
   String? startDate;
   String? endDate;
-  List<Appointment>? appointments;
+  List<String>? appointments;
   List<String>? notes;
 
   Treatment(
@@ -19,9 +19,10 @@ class Treatment {
   Treatment.fromJson(Map<String, dynamic> json) {
     startDate = json["startDate"];
     endDate = json["endDate"];
-    appointments = List.generate(json["appointments"].length,
-        (index) => Appointment.fromJson(json["appointments"][index]));
-    notes = [json["notes"]];
+    appointments = json["appointments"].cast<String>();
+    json["appointments"].cast<Appointment>();
+    notes = json["notes"].cast<String>();
+    id = json['id'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -29,7 +30,7 @@ class Treatment {
     data['endDate'] = this.endDate;
     data['appointments'] = this.appointments;
     data['notes'] = this.notes;
-
+    data['id'] = this.id;
     return data;
   }
 }

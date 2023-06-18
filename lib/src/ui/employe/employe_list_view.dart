@@ -64,17 +64,15 @@ class _EmployeListViewState extends State<EmployeListView> {
               return Card(
                 child: ListTile(
                   leading: Icon(Icons.supervised_user_circle, size: 48),
-                  title: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(employe2[index].tc.toString())),
-                  subtitle: Text(employe2[index].name!.toString()),
+                  title: Text(provider.employeList[index].tc.toString()),
+                  subtitle: Text(provider.employeList[index].name!.toString()),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: () {
-                          provider.changeEmploye(employe2[index]);
+                          provider.changeEmploye(provider.employeList[index]);
                           Navigator.of(context)
                               .pushNamed(RoutesKeys.employeEdit);
                         },
@@ -82,7 +80,7 @@ class _EmployeListViewState extends State<EmployeListView> {
                       IconButton(
                         icon: Icon(Icons.delete),
                         onPressed: () {
-                          provider.changeEmploye(employe2[index]);
+                          provider.changeEmploye(provider.employeList[index]);
                           Navigator.of(context)
                               .pushNamed(RoutesKeys.employeDelete);
                         },
@@ -93,7 +91,7 @@ class _EmployeListViewState extends State<EmployeListView> {
                 ),
               );
             },
-            itemCount: employe2.length,
+            itemCount: provider.employeList.length,
           ),
         ),
       ],

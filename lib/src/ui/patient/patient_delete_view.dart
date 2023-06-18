@@ -85,6 +85,7 @@ class _PatientDeleteViewState extends State<PatientDeleteView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.deletePatient(provider.CurrentPatient!);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Sil'),

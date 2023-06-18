@@ -76,6 +76,7 @@ class _PolyclinicAddViewState extends State<PolyclinicAddView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.addPolyclinic(polyclinic);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Ekle'),

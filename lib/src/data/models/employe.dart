@@ -27,6 +27,7 @@ class Employe {
     birthDate = json['birthDate'];
     gender = json['gender'];
     department = json['department'];
+    id = json['id'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -36,6 +37,7 @@ class Employe {
     data['birthDate'] = this.birthDate;
     data['gender'] = this.gender;
     data['department'] = this.department;
+    data['id'] = this.id;
     return data;
   }
 }

@@ -64,6 +64,7 @@ class _PolyclinicDeleteViewState extends State<PolyclinicDeleteView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.deletePolyclinic(provider.CurrentPolyclinic!);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Sil'),

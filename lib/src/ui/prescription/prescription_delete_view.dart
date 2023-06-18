@@ -85,6 +85,7 @@ class _PrescriptionDeleteViewState extends State<PrescriptionDeleteView> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   provider.deletePrescription(provider.CurrentPrescription!);
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text('Sil'),

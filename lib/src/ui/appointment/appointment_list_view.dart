@@ -90,7 +90,7 @@ class _AppointmentListViewState extends State<AppointmentListView> {
                           provider.changeAppointment(
                               provider.appointmentList[index]);
                           Navigator.of(context)
-                              .pushNamed(RoutesKeys.appointmentEdit);
+                              .pushNamed(RoutesKeys.appointmentDelete);
                         },
                       ),
                     ],
